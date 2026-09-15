@@ -20,6 +20,7 @@
   --pri-a:#c8462c;
   --pri-b:#c98a1f;
   --pri-c:#2b7684;
+  --statut-reclasser:#8a4a7d;
   --ring:#a9b1bd;
   --ref:#13151b;
   --water:#d2dce8;
@@ -40,6 +41,7 @@
   --line:#2a2e38; --line-strong:#383d49;
   --accent:#8391e3; --accent-ink:#0f1115; --accent-soft:rgba(131,145,227,.16);
   --pri-a:#e8785e; --pri-b:#e6ae4c; --pri-c:#57a9bb;
+  --statut-reclasser:#c98abd;
   --ring:#3c424f; --ref:#edeff3;
   --water:#151d28; --park:#141b17;
   --road-a:#2e3541; --road-b:#242a34; --road-c:#1c2028;
@@ -122,7 +124,7 @@ select.sel option{color:var(--ink);background:var(--surface);}
   border:1px solid transparent;}
 .card:hover{background:var(--surface-2);}
 .card.is-active{background:var(--accent-soft);border-color:var(--accent);}
-.card .pdot{width:10px;height:10px;border-radius:50%;margin-top:4px;flex:none;}
+.card .cdot{width:10px;height:10px;margin-top:4px;}
 .card .body1{min-width:0;flex:1;}
 .card .name{font:500 13px var(--font-body);color:var(--ink);white-space:nowrap;overflow:hidden;
   text-overflow:ellipsis;}
@@ -157,13 +159,38 @@ svg#plan.grabbing{cursor:grabbing;}
 .reflabel{font:600 12px var(--font-body);fill:var(--ref);
   paint-order:stroke fill;stroke:var(--ground);stroke-width:3.5px;stroke-linejoin:round;}
 
-.marker{cursor:pointer;}
-.marker circle.body{stroke-width:1.6;}
-.marker.pri-A circle.body{fill:var(--pri-a);stroke:var(--pri-a);}
-.marker.pri-B circle.body{fill:var(--pri-b);stroke:var(--pri-b);}
-.marker.pri-C circle.body{fill:var(--pri-c);stroke:var(--pri-c);}
+/* Pastille de liste et d'infobulle : même lecture que le marqueur sur la carte. */
+.cdot{--dot-color:var(--ink-soft);background:var(--dot-color);border-radius:50%;flex:none;}
+.chip .cdot{width:8px;height:8px;}
+.legend .cdot.legend-dot{width:9px;height:9px;}
+.cdot.pri-A{--dot-color:var(--pri-a);}
+.cdot.pri-B{--dot-color:var(--pri-b);}
+.cdot.pri-C{--dot-color:var(--pri-c);}
+.cdot.st-reclasser{--dot-color:var(--statut-reclasser);}
+.cdot.st-hors_atelier{opacity:.45;}
+.cdot.st-exclu{background:none;border:2px solid var(--dot-color);}
+
+.marker{cursor:pointer;--marker-color:var(--muted);--marker-fill:.82;--marker-stroke:1;}
+.marker.pri-A{--marker-color:var(--pri-a);}
+.marker.pri-B{--marker-color:var(--pri-b);}
+.marker.pri-C{--marker-color:var(--pri-c);}
+/* Le statut prime sur la priorité pour la teinte : déclaré après, il gagne à spécificité égale. */
+.marker.st-reclasser{--marker-color:var(--statut-reclasser);}
+.marker.st-hors_atelier{--marker-fill:.2;--marker-stroke:.5;}
+.marker.st-exclu{--marker-fill:0;--marker-stroke:.8;}
+.marker circle.body{
+  fill:var(--marker-color);stroke:var(--marker-color);stroke-width:1.6;
+  fill-opacity:var(--marker-fill);stroke-opacity:var(--marker-stroke);
+}
+/* Le pointillé « effectif estimé » garde un contour lisible quel que soit le statut. */
+.marker.est circle.body{
+  fill-opacity:calc(var(--marker-fill) * .6);stroke-dasharray:3 3;
+  stroke-opacity:max(var(--marker-stroke), .7);
+}
 .marker.is-active,.marker:hover{transform:scale(1.14);transform-box:fill-box;transform-origin:center;}
-.marker.is-active circle.body,.marker:hover circle.body{stroke:var(--ink);stroke-width:2.2;}
+.marker.is-active circle.body,.marker:hover circle.body{
+  stroke:var(--ink);stroke-width:2.2;stroke-opacity:1;
+}
 .marker{transition:transform .13s cubic-bezier(.16,1,.3,1);}
 @media (prefers-reduced-motion:reduce){
   .marker,svg#plan,.refhalo,.brief,.brief-panel{transition:none!important;animation:none!important;}
@@ -192,7 +219,7 @@ svg#plan.grabbing{cursor:grabbing;}
   padding:12px 14px;box-shadow:var(--shadow);font-size:12.5px;color:var(--ink-soft);width:184px;}
 .legend h2{margin:0 0 8px;font:600 11px var(--font-body);letter-spacing:.06em;text-transform:uppercase;
   color:var(--muted);}
-.legend h2 + h2{margin-top:12px;}
+.legend div + h2{margin-top:13px;}
 .legend .row{display:flex;align-items:center;gap:8px;margin-bottom:5px;}
 .legend .dot{width:9px;height:9px;border-radius:50%;flex:none;}
 .legend .est-swatch{width:15px;height:15px;border-radius:50%;border:1.6px dashed var(--muted);flex:none;}
@@ -206,7 +233,7 @@ svg#plan.grabbing{cursor:grabbing;}
   cursor:pointer;padding:2px;display:grid;place-items:center;}
 .tooltip .tt-close:hover{color:var(--ink);}
 .tooltip .tt-top{display:flex;align-items:flex-start;gap:9px;margin-bottom:8px;padding-right:20px;}
-.tooltip .tt-dot{width:10px;height:10px;border-radius:50%;margin-top:5px;flex:none;}
+.tooltip .cdot{width:10px;height:10px;margin-top:5px;}
 .tooltip .tt-name{font:500 14.5px var(--font-body);color:var(--ink);line-height:1.25;}
 .tooltip .tt-enseigne{font-size:12.5px;color:var(--muted);}
 .tooltip dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:12px;}
@@ -218,6 +245,10 @@ svg#plan.grabbing{cursor:grabbing;}
 .badge.est{background:var(--surface-2);color:var(--muted);border:1px dashed var(--line-strong);}
 .badge.cse-ok{background:var(--accent-soft);color:var(--accent);}
 .badge.cse-tbd{background:var(--surface-2);color:var(--muted);}
+.badge.statut{background:var(--surface-2);color:var(--muted);margin-right:6px;}
+.badge.statut.st-reclasser{color:var(--statut-reclasser);
+  background:color-mix(in srgb, var(--statut-reclasser) 13%, transparent);}
+.tooltip .tt-motif{margin:0 0 11px;font-size:12.5px;line-height:1.55;color:var(--ink-soft);}
 
 .filter-hint{
   left:50%;bottom:16px;transform:translateX(-50%);width:min(340px,calc(100% - 28px));
@@ -249,6 +280,8 @@ svg#plan.grabbing{cursor:grabbing;}
 .brief-limits li{position:relative;padding-left:17px;font-size:13.5px;line-height:1.55;color:var(--ink-soft);}
 .brief-limits li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:6px;
   border-radius:50%;border:1.4px dashed var(--muted);}
+.brief-qualif{margin:28px 0 0;font-size:13.5px;line-height:1.6;color:var(--ink-soft);}
+.brief-qualif strong{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums;}
 .brief-source{margin-top:24px;font-size:12px;line-height:1.5;color:var(--muted);}
 .brief-actions{margin-top:20px;}
 
@@ -301,6 +334,10 @@ svg#plan.grabbing{cursor:grabbing;}
   <div class="body">
     <aside class="sidebar" id="sidebar">
       <div class="filters">
+        <div class="filter-group" id="groupStatut" hidden>
+          <h2>Statut de qualification</h2>
+          <div class="chips" id="chipsStatut"></div>
+        </div>
         <div class="filter-group">
           <h2>Priorité (effectif sur site)</h2>
           <div class="chips" id="chipsPriorite"></div>
@@ -351,6 +388,7 @@ svg#plan.grabbing{cursor:grabbing;}
         <div class="bar" id="scalebarBar" style="width:80px"></div>
       </div>
       <div class="mapui legend">
+        <div id="legendStatut" hidden></div>
         <h2>Priorité</h2>
         <div class="row"><span class="dot" style="background:var(--pri-a)"></span>A · 50 salariés et +</div>
         <div class="row"><span class="dot" style="background:var(--pri-b)"></span>B · 20 à 49</div>
@@ -392,6 +430,7 @@ svg#plan.grabbing{cursor:grabbing;}
           <div id="briefBody"></div>
           <h3>Les limites de cette carte</h3>
           <ul class="brief-limits" id="briefLimits"></ul>
+          <p class="brief-qualif" id="briefQualif" hidden></p>
           <p class="brief-source" id="briefSource"></p>
           <div class="brief-actions">
             <button class="btn btn-primary" id="closeBrief" type="button">Explorer la carte</button>
@@ -425,10 +464,21 @@ const K_MIN = 0.55, K_MAX = 7;
 let DATA=null, points=[], ref=null;
 let markerEls={}, cardEls={}, csEls=[];
 const DEFAULT_INTERLOCUTEUR = "CSE d'établissement";
-let filters={priorite:new Set(['A']), interlocuteur:new Set([DEFAULT_INTERLOCUTEUR]), secteur:'all', estime:true};
+const STATUT_DEFAUT = 'a_appeler';
+const STATUT_LABEL = {
+  a_appeler:'À appeler', reclasser:'À reclasser',
+  hors_atelier:'Hors atelier', exclu:'Exclu'
+};
+let filters={statut:new Set([STATUT_DEFAUT]), priorite:new Set(['A']),
+  interlocuteur:new Set([DEFAULT_INTERLOCUTEUR]), secteur:'all', estime:true};
 let selectedId=null, hoveredId=null;
 let view={x:0,y:0,k:1}, baseScale=1;
 let ALL_INTERLOCUTEUR=[], hintShown=false;
+/* Les statuts n'existent que si le jeu de données les fournit ; sinon la carte
+   fonctionne exactement comme avant, sans filtre Statut. */
+let STATUTS=[], COMPTEURS_STATUT={}, hasStatut=false;
+const statutLabel = k => STATUT_LABEL[k] || k.replace(/_/g,' ');
+const statutClass = p => hasStatut && p.statut ? ' st-'+p.statut : '';
 
 function project(lat,lng,lat0,lng0){
   const mPerDegLng = MPERDEG_LAT*Math.cos(lat0*Math.PI/180);
@@ -456,6 +506,15 @@ async function init(){
     const xy = project(p.lat,p.lng,ref.lat,ref.lng);
     return {...p, _x:xy.x, _y:xy.y};
   });
+
+  /* Les compteurs déclarés font foi ; à défaut, on les recompte sur les points. */
+  const repStatut = m.repartition_statut;
+  STATUTS = repStatut ? Object.keys(repStatut)
+    : [...new Set(points.map(p=>p.statut).filter(Boolean))];
+  hasStatut = STATUTS.length > 0;
+  COMPTEURS_STATUT = repStatut || Object.fromEntries(
+    STATUTS.map(k => [k, points.filter(p=>p.statut===k).length]));
+  if(!hasStatut) filters.statut = null;
 
   document.getElementById('lede').innerHTML =
     `<strong>${m.entreprises_retenues} comptes cibles</strong> : au moins 10 salariés sur site, `
@@ -507,6 +566,28 @@ function chipClass(kind, val){
   return filters[kind].has(val) ? 'chip active' : 'chip off';
 }
 function buildFilters(rep, legende){
+  if(hasStatut){
+    const compteurs = COMPTEURS_STATUT;
+    const defs = legende.statut || {};
+    document.getElementById('groupStatut').hidden = false;
+    document.querySelector('.filter-hint p').textContent =
+      `Par défaut, la carte n'affiche que les comptes à appeler, en priorité A et avec un CSE `
+      + `d'établissement. Tu peux modifier cela à loisir via la partie supérieure gauche de l'interface.`;
+    document.getElementById('chipsStatut').innerHTML = STATUTS.map(k =>
+      `<button class="${chipClass('statut',k)}" type="button" aria-pressed="${filters.statut.has(k)}" data-kind="statut" data-val="${k}" title="${noDash(defs[k]||'')}">
+         <span class="cdot st-${k}"></span>${statutLabel(k)} · ${compteurs[k]}</button>`
+    ).join('');
+
+    /* La légende ne reprend que les traitements qui s'écartent du marqueur normal. */
+    const ecartes = STATUTS.filter(k => k !== STATUT_DEFAUT);
+    const legStatut = document.getElementById('legendStatut');
+    legStatut.innerHTML = '<h2>Statut</h2>' + ecartes.map(k =>
+      `<div class="row" title="${noDash(defs[k]||'')}">
+         <span class="cdot legend-dot st-${k}"></span>${statutLabel(k)}</div>`
+    ).join('');
+    legStatut.hidden = false;
+  }
+
   document.getElementById('chipsPriorite').innerHTML = ['A','B','C'].map(k =>
     `<button class="${chipClass('priorite',k)}" type="button" aria-pressed="${filters.priorite.has(k)}" data-kind="priorite" data-val="${k}" title="${noDash(legende.priorite[k])}">
        <span class="dot" style="background:${PRI_COLOR[k]}"></span>${k} · ${rep.par_priorite[k]}</button>`
@@ -583,12 +664,11 @@ function buildMarkers(){
     const pos = document.createElementNS('http://www.w3.org/2000/svg','g');
     pos.setAttribute('transform',`translate(${p._x} ${p._y})`);
     const g = document.createElementNS('http://www.w3.org/2000/svg','g');
-    g.setAttribute('class',`marker pri-${p.priorite}`);
+    g.setAttribute('class',`marker pri-${p.priorite}${statutClass(p)}${estime?' est':''}`);
     g.dataset.id = p.siret;
     g.innerHTML = `
       <circle r="${Math.max(r+10,24)}" fill="transparent"></circle>
-      <circle class="body" r="${r}" fill-opacity="${estime?0.5:0.82}"
-        vector-effect="non-scaling-stroke" ${estime?'stroke-dasharray="3 3"':''}></circle>`;
+      <circle class="body" r="${r}" vector-effect="non-scaling-stroke"></circle>`;
     g.addEventListener('click', e=>{ e.stopPropagation(); selectPoint(p.siret, true); });
     g.addEventListener('mouseenter', ()=>setHover(p.siret));
     g.addEventListener('mouseleave', ()=>setHover(null));
@@ -619,12 +699,22 @@ function buildBrief(m){
     ne veut pas dire «&nbsp;absent&nbsp;».</li>
     <li>Les entreprises non diffusibles sont absentes de la source&nbsp;: ${m.entreprises_retenues} est donc
     un plancher.</li>`;
+  const qualif = document.getElementById('briefQualif');
+  if(hasStatut){
+    const retenus = COMPTEURS_STATUT[STATUT_DEFAUT];
+    qualif.innerHTML = `Les <strong>${m.entreprises_retenues} entreprises</strong> ont été qualifiées une par
+      une&nbsp;: <strong>${retenus}</strong> sont retenues pour la prospection, les autres relèvent d'une autre
+      logique commerciale ou ne sont pas mobilisables sur place. Les comptes écartés restent consultables via
+      le filtre Statut, pour que le raisonnement soit vérifiable plutôt qu'à croire sur parole.`;
+    qualif.hidden = false;
+  }
   document.getElementById('briefSource').textContent =
     `Source : API Recherche d'entreprises (base Sirene), extraction du ${d}. Fond de plan : OpenStreetMap.`;
 }
 
 function visibleFor(p){
-  return filters.priorite.has(p.priorite)
+  return (!hasStatut || filters.statut.has(p.statut))
+    && filters.priorite.has(p.priorite)
     && filters.interlocuteur.has(p.interlocuteur)
     && (filters.secteur==='all' || p.secteur===filters.secteur)
     && (filters.estime || p.effectif_fiabilite!=='Estimé');
@@ -639,9 +729,7 @@ function applyFilters(){
     ? b.salaries_site-a.salaries_site
     : a.priorite.localeCompare(b.priorite));
   document.getElementById('listCount').textContent =
-    visible.length === points.length
-      ? `${points.length} entreprises`
-      : `${visible.length} entreprises sur ${points.length}`;
+    `${visible.length} comptes affichés sur ${points.length}`;
 
   cardEls = {};
   if(visible.length === 0){
@@ -653,20 +741,13 @@ function applyFilters(){
         <p>Aucune entreprise ne correspond à ces filtres.</p>
         <button class="btn" id="clearFilters" type="button">Réinitialiser les filtres</button>
       </div>`;
-    document.getElementById('clearFilters').addEventListener('click', ()=>{
-      filters.priorite = new Set(['A','B','C']);
-      filters.interlocuteur = new Set(ALL_INTERLOCUTEUR);
-      filters.secteur = 'all';
-      document.getElementById('selSecteur').value = 'all';
-      refreshChipStates();
-      applyFilters();
-    });
+    document.getElementById('clearFilters').addEventListener('click', ouvrirTousLesFiltres);
     if(selectedId) closeTooltip();
     return;
   }
   listEl.innerHTML = visible.map(p=>`
     <div class="card" data-id="${p.siret}" tabindex="0" role="button">
-      <span class="pdot" style="background:${PRI_COLOR[p.priorite]}"></span>
+      <span class="cdot pri-${p.priorite}${statutClass(p)}"></span>
       <div class="body1">
         <div class="name">${p.nom}</div>
         <div class="sub">${p.secteur} · ${p.interlocuteur}</div>
@@ -719,6 +800,13 @@ function selectPoint(id, panTo, fromList){
   if(window.innerWidth<=MOBILE_BP) closeDrawer();
 }
 
+/* Le motif justifie la mise à l'écart : inutile de l'afficher sur un compte retenu. */
+function motifBlock(p){
+  if(!hasStatut || !p.statut || p.statut === STATUT_DEFAUT || !p.motif) return '';
+  return `<p class="tt-motif">
+    <span class="badge statut st-${p.statut}">${statutLabel(p.statut)}</span>${p.motif}</p>`;
+}
+
 function showTooltip(p){
   if(!p) return;
   const lg = DATA.legende;
@@ -727,12 +815,13 @@ function showTooltip(p){
       <svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.2 4.2l7.6 7.6M11.8 4.2l-7.6 7.6"/></svg>
     </button>
     <div class="tt-top">
-      <span class="tt-dot" style="background:${PRI_COLOR[p.priorite]}"></span>
+      <span class="cdot pri-${p.priorite}${statutClass(p)}"></span>
       <div>
         <div class="tt-name">${p.nom}</div>
         ${p.enseigne? `<div class="tt-enseigne">${p.enseigne}</div>`:''}
       </div>
     </div>
+    ${motifBlock(p)}
     <dl>
       <dt>Effectif site</dt><dd>${fmtInt(p.salaries_site)} ${p.effectif_fiabilite==='Estimé'?'<span class="badge est">estimé</span>':''}</dd>
       <dt>Effectif entreprise</dt><dd>${fmtInt(p.salaries_entreprise)}</dd>
@@ -944,6 +1033,15 @@ function refreshChipStates(){
     chip.setAttribute('aria-pressed', String(on));
   });
 }
+function ouvrirTousLesFiltres(){
+  if(hasStatut) filters.statut = new Set(STATUTS);
+  filters.priorite = new Set(['A','B','C']);
+  filters.interlocuteur = new Set(ALL_INTERLOCUTEUR);
+  filters.secteur = 'all';
+  document.getElementById('selSecteur').value = 'all';
+  refreshChipStates();
+  applyFilters();
+}
 
 function bindUiInteractions(){
   document.getElementById('drawerToggle').addEventListener('click', ()=>{
@@ -954,10 +1052,7 @@ function bindUiInteractions(){
   document.getElementById('closeBrief').addEventListener('click', closeBrief);
   document.getElementById('dismissHint').addEventListener('click', hideFilterHint);
   document.getElementById('showAllFilters').addEventListener('click', ()=>{
-    filters.priorite = new Set(['A','B','C']);
-    filters.interlocuteur = new Set(ALL_INTERLOCUTEUR);
-    refreshChipStates();
-    applyFilters();
+    ouvrirTousLesFiltres();
     hideFilterHint();
     if(window.innerWidth<=MOBILE_BP) openDrawer();
   });
