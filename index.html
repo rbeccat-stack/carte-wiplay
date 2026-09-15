@@ -509,8 +509,15 @@ async function init(){
 
   /* Les compteurs déclarés font foi ; à défaut, on les recompte sur les points. */
   const repStatut = m.repartition_statut;
-  STATUTS = repStatut ? Object.keys(repStatut)
+  const statutsBruts = repStatut ? Object.keys(repStatut)
     : [...new Set(points.map(p=>p.statut).filter(Boolean))];
+  /* L'ordre du JSON n'est pas garanti : on affiche du plus actionnable au plus écarté,
+     puis tout statut inconnu à la suite. */
+  const ordreAffichage = Object.keys(STATUT_LABEL);
+  STATUTS = [
+    ...ordreAffichage.filter(k => statutsBruts.includes(k)),
+    ...statutsBruts.filter(k => !ordreAffichage.includes(k))
+  ];
   hasStatut = STATUTS.length > 0;
   COMPTEURS_STATUT = repStatut || Object.fromEntries(
     STATUTS.map(k => [k, points.filter(p=>p.statut===k).length]));

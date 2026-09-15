@@ -20,7 +20,14 @@
       "effectif site mesuré quand la donnée établissement existe, sinon estimé (effectif entreprise ÷ nombre de sites)",
       "entreprises non diffusibles absentes de la source : le dénombrement est un plancher"
     ],
-    "aucune_donnee_personnelle": true
+    "aucune_donnee_personnelle": true,
+    "revision": "2026-09-15 : qualification manuelle des 192 comptes",
+    "repartition_statut": {
+      "exclu": 18,
+      "hors_atelier": 60,
+      "reclasser": 15,
+      "a_appeler": 99
+    }
   },
   "legende": {
     "priorite": {
@@ -36,6 +43,12 @@
     "cse": {
       "Confirmé": "index égalité professionnelle publié, seuil de 50 salariés franchi",
       "À vérifier": "aucun registre public des CSE n'existe ; absence de preuve, pas preuve d'absence"
+    },
+    "statut": {
+      "a_appeler": "compte retenu pour la prospection",
+      "reclasser": "compte valide mais autre logique commerciale : la cible n est pas le salarie",
+      "hors_atelier": "personnel non mobilisable collectivement, pouvoir d achat au national",
+      "exclu": "salaries rattaches a l etablissement mais jamais presents, ou hors champ"
     }
   },
   "repartition": {
@@ -91,7 +104,9 @@
       "activite": "Autres intermédiations monétaires",
       "adresse": "18 RUE DE LA REPUBLIQUE 69002 LYON",
       "minutes_a_pied": 5,
-      "distance_km": 0.283
+      "distance_km": 0.283,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "523371052",
@@ -115,7 +130,9 @@
       "activite": "Accueil de jeunes enfants",
       "adresse": "43 AVENUE MARECHAL DE SAXE 69006 LYON",
       "minutes_a_pied": 14,
-      "distance_km": 0.806
+      "distance_km": 0.806,
+      "statut": "exclu",
+      "motif": "garde d enfants au domicile des familles"
     },
     {
       "siren": "339391021",
@@ -139,7 +156,9 @@
       "activite": "Arts du spectacle vivant",
       "adresse": "1 PLACE DE LA COMEDIE 69001 LYON",
       "minutes_a_pied": 3,
-      "distance_km": 0.151
+      "distance_km": 0.151,
+      "statut": "reclasser",
+      "motif": "institution musicale : prescripteur ou partenaire, pas prospect atelier"
     },
     {
       "siren": "779883313",
@@ -163,7 +182,9 @@
       "activite": "Enseignement secondaire général",
       "adresse": "4 MONTEE SAINT BARTHELEMY 69005 LYON",
       "minutes_a_pied": 12,
-      "distance_km": 0.677
+      "distance_km": 0.677,
+      "statut": "reclasser",
+      "motif": "etablissement d enseignement : la cible est l eleve, pas le salarie"
     },
     {
       "siren": "428610463",
@@ -187,7 +208,9 @@
       "activite": "Nettoyage courant des bâtiments",
       "adresse": "32 RUE MALESHERBES 69006 LYON",
       "minutes_a_pied": 12,
-      "distance_km": 0.717
+      "distance_km": 0.717,
+      "statut": "exclu",
+      "motif": "agents de proprete chez les clients"
     },
     {
       "siren": "304614084",
@@ -211,7 +234,9 @@
       "activite": "Enseignement secondaire général",
       "adresse": "24 MONTEE SAINT BARTHELEMY 69005 LYON",
       "minutes_a_pied": 13,
-      "distance_km": 0.767
+      "distance_km": 0.767,
+      "statut": "reclasser",
+      "motif": "etablissement d enseignement : la cible est l eleve, pas le salarie"
     },
     {
       "siren": "482062585",
@@ -235,7 +260,9 @@
       "activite": "Ingénierie, études techniques",
       "adresse": "3 PLACE DE LA BOURSE 69002 LYON",
       "minutes_a_pied": 4,
-      "distance_km": 0.238
+      "distance_km": 0.238,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "969505452",
@@ -259,7 +286,9 @@
       "activite": "Services auxiliaires des transports terrestres",
       "adresse": "2 PLACE DES CORDELIERS 69002 LYON",
       "minutes_a_pied": 6,
-      "distance_km": 0.362
+      "distance_km": 0.362,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "533373619",
@@ -283,7 +312,9 @@
       "activite": "Conseil en systèmes et logiciels informatiques",
       "adresse": "2 RUE GROLEE 69002 LYON",
       "minutes_a_pied": 7,
-      "distance_km": 0.38
+      "distance_km": 0.38,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "418827655",
@@ -307,7 +338,9 @@
       "activite": "Conseil en systèmes et logiciels informatiques",
       "adresse": "3 RUE DE L'ARBRE SEC 69001 LYON",
       "minutes_a_pied": 1,
-      "distance_km": 0.038
+      "distance_km": 0.038,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "672040896",
@@ -331,7 +364,9 @@
       "activite": "Conseil pour les affaires et autres conseils de gestion",
       "adresse": "4 QUAI JEAN MOULIN 69001 LYON",
       "minutes_a_pied": 4,
-      "distance_km": 0.205
+      "distance_km": 0.205,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "442812574",
@@ -355,7 +390,9 @@
       "activite": "Conseil pour les affaires et autres conseils de gestion",
       "adresse": "9 PLACE AMEDEE BONNET 69002 LYON",
       "minutes_a_pied": 15,
-      "distance_km": 0.866
+      "distance_km": 0.866,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "428634356",
@@ -379,7 +416,9 @@
       "activite": "Ingénierie, études techniques",
       "adresse": "6 RUE GROLEE 69002 LYON",
       "minutes_a_pied": 8,
-      "distance_km": 0.454
+      "distance_km": 0.454,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "333306801",
@@ -403,7 +442,9 @@
       "activite": "Autres activités de poste et de courrier",
       "adresse": "CITYWORK 57 57 RUE PRESIDENT EDOUARD HERRIOT 69002 LYON",
       "minutes_a_pied": 8,
-      "distance_km": 0.49
+      "distance_km": 0.49,
+      "statut": "exclu",
+      "motif": "coursiers en tournee, adresse de coworking, effectif estime"
     },
     {
       "siren": "779827385",
@@ -427,7 +468,9 @@
       "activite": "Activités des infirmiers et des sages-femmes",
       "adresse": "1 RUE IMBERT COLOMES 69001 LYON",
       "minutes_a_pied": 10,
-      "distance_km": 0.598
+      "distance_km": 0.598,
+      "statut": "exclu",
+      "motif": "soins infirmiers a domicile"
     },
     {
       "siren": "334473352",
@@ -451,7 +494,9 @@
       "activite": "Commerce de détail de matériels audio et vidéo en magasin spécialisé",
       "adresse": "85 RUE DE LA REPUBLIQUE 69002 LYON",
       "minutes_a_pied": 11,
-      "distance_km": 0.637
+      "distance_km": 0.637,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "808699912",
@@ -475,7 +520,9 @@
       "activite": "Hôtels et hébergement similaire",
       "adresse": "INTERCONTINENTAL GRAND HOTEL DIEU 20 QUAI JULES COURMONT 69002 LYON",
       "minutes_a_pied": 15,
-      "distance_km": 0.855
+      "distance_km": 0.855,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "487574394",
@@ -499,7 +546,9 @@
       "activite": "Conseil en systèmes et logiciels informatiques",
       "adresse": "9 PLACE AMEDEE BONNET 69002 LYON",
       "minutes_a_pied": 15,
-      "distance_km": 0.866
+      "distance_km": 0.866,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "420418774",
@@ -523,7 +572,9 @@
       "activite": "Ingénierie, études techniques",
       "adresse": "3 PLACE DE LA BOURSE 69002 LYON",
       "minutes_a_pied": 4,
-      "distance_km": 0.238
+      "distance_km": 0.238,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "524347945",
@@ -547,7 +598,9 @@
       "activite": "Conseil en relations publiques et communication",
       "adresse": "7 RUE DE LA REPUBLIQUE 69001 LYON",
       "minutes_a_pied": 1,
-      "distance_km": 0.076
+      "distance_km": 0.076,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "562033175",
@@ -571,7 +624,9 @@
       "activite": "Fabrication d’articles de joaillerie et bijouterie",
       "adresse": "4 RUE JOSEPH SERLIN 69001 LYON",
       "minutes_a_pied": 2,
-      "distance_km": 0.088
+      "distance_km": 0.088,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "440235638",
@@ -595,7 +650,9 @@
       "activite": "Restauration traditionnelle",
       "adresse": "18 RUE NEUVE 69002 LYON",
       "minutes_a_pied": 3,
-      "distance_km": 0.156
+      "distance_km": 0.156,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "510126949",
@@ -619,7 +676,9 @@
       "activite": "Formation continue d'adultes",
       "adresse": "5 QUAI JEAN MOULIN 69001 LYON",
       "minutes_a_pied": 4,
-      "distance_km": 0.203
+      "distance_km": 0.203,
+      "statut": "a_appeler",
+      "motif": "siege, consultants salaries"
     },
     {
       "siren": "527931240",
@@ -643,7 +702,9 @@
       "activite": "Conseil en systèmes et logiciels informatiques",
       "adresse": "7 QUAI JEAN MOULIN 69001 LYON",
       "minutes_a_pied": 4,
-      "distance_km": 0.206
+      "distance_km": 0.206,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "822765582",
@@ -667,7 +728,9 @@
       "activite": "Conseil pour les affaires et autres conseils de gestion",
       "adresse": "45 RUE DE LA BOURSE 69002 LYON",
       "minutes_a_pied": 5,
-      "distance_km": 0.288
+      "distance_km": 0.288,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "443163993",
@@ -691,7 +754,9 @@
       "activite": "Commerce de détail de produits pharmaceutiques en magasin spécialisé",
       "adresse": "PHARMACIE PRINCIPALE 22 RUE DE LA REPUBLIQUE 69002 LYON",
       "minutes_a_pied": 6,
-      "distance_km": 0.331
+      "distance_km": 0.331,
+      "statut": "a_appeler",
+      "motif": "site unique, decideur sur place"
     },
     {
       "siren": "305933517",
@@ -715,7 +780,9 @@
       "activite": "Autres organisations fonctionnant par adhésion volontaire",
       "adresse": "18 PLACE TOLOZAN 69001 LYON",
       "minutes_a_pied": 7,
-      "distance_km": 0.394
+      "distance_km": 0.394,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "503127185",
@@ -739,7 +806,9 @@
       "activite": "Aide à domicile",
       "adresse": "11 RUE TERME 69001 LYON",
       "minutes_a_pied": 7,
-      "distance_km": 0.407
+      "distance_km": 0.407,
+      "statut": "exclu",
+      "motif": "aide a domicile"
     },
     {
       "siren": "347384570",
@@ -763,7 +832,9 @@
       "activite": "Commerce de détail d'appareils électroménagers en magasin spécialisé",
       "adresse": "2 RUE PRESIDENT CARNOT 69002 LYON",
       "minutes_a_pied": 7,
-      "distance_km": 0.409
+      "distance_km": 0.409,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "432607695",
@@ -787,7 +858,9 @@
       "activite": "Activités des agences de travail temporaire",
       "adresse": "3 GRANDE RUE DES FEUILLANTS 69001 LYON",
       "minutes_a_pied": 7,
-      "distance_km": 0.43
+      "distance_km": 0.43,
+      "statut": "exclu",
+      "motif": "agence d interim : l effectif est en mission"
     },
     {
       "siren": "887941524",
@@ -811,7 +884,9 @@
       "activite": "Conseil en systèmes et logiciels informatiques",
       "adresse": "53 RUE PRESIDENT EDOUARD HERRIOT 69002 LYON",
       "minutes_a_pied": 8,
-      "distance_km": 0.454
+      "distance_km": 0.454,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "808083646",
@@ -835,7 +910,9 @@
       "activite": "Activités comptables",
       "adresse": "32 RUE DE LA REPUBLIQUE 69002 LYON",
       "minutes_a_pied": 9,
-      "distance_km": 0.517
+      "distance_km": 0.517,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "503314767",
@@ -859,7 +936,9 @@
       "activite": "Grands magasins",
       "adresse": "34 A 38 34 RUE DE LA REPUBLIQUE 69002 LYON",
       "minutes_a_pied": 10,
-      "distance_km": 0.569
+      "distance_km": 0.569,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "794759001",
@@ -883,7 +962,9 @@
       "activite": "Commerce de gros (commerce interentreprises) d'habillement et de chaussures",
       "adresse": "9-11 9 RUE PRESIDENT CARNOT 69002 LYON",
       "minutes_a_pied": 10,
-      "distance_km": 0.572
+      "distance_km": 0.572,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "518384847",
@@ -907,7 +988,9 @@
       "activite": "Accueil de jeunes enfants",
       "adresse": "19 RUE BUGEAUD 69006 LYON",
       "minutes_a_pied": 11,
-      "distance_km": 0.645
+      "distance_km": 0.645,
+      "statut": "reclasser",
+      "motif": "creche : la cible est l enfant et sa famille"
     },
     {
       "siren": "841030513",
@@ -931,7 +1014,9 @@
       "activite": "Hôtels et hébergement similaire",
       "adresse": "11 QUAI JULES COURMONT 69002 LYON",
       "minutes_a_pied": 11,
-      "distance_km": 0.65
+      "distance_km": 0.65,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "405880535",
@@ -955,7 +1040,9 @@
       "activite": "Autre imprimerie (labeur)",
       "adresse": "3 PLACE GERSON 69005 LYON",
       "minutes_a_pied": 12,
-      "distance_km": 0.664
+      "distance_km": 0.664,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "784280729",
@@ -979,7 +1066,9 @@
       "activite": "Enseignement supérieur",
       "adresse": "71 RUE MOLIERE 69003 LYON",
       "minutes_a_pied": 13,
-      "distance_km": 0.727
+      "distance_km": 0.727,
+      "statut": "reclasser",
+      "motif": "etablissement d enseignement : la cible est l eleve, pas le salarie"
     },
     {
       "siren": "879515484",
@@ -1003,7 +1092,9 @@
       "activite": "Restauration traditionnelle",
       "adresse": "48-50 48 RUE DE LA REPUBLIQUE 69002 LYON",
       "minutes_a_pied": 13,
-      "distance_km": 0.736
+      "distance_km": 0.736,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "392531554",
@@ -1027,7 +1118,9 @@
       "activite": "Nettoyage courant des bâtiments",
       "adresse": "36 RUE VAUBAN 69006 LYON",
       "minutes_a_pied": 14,
-      "distance_km": 0.803
+      "distance_km": 0.803,
+      "statut": "exclu",
+      "motif": "agents de proprete chez les clients"
     },
     {
       "siren": "955503982",
@@ -1051,7 +1144,9 @@
       "activite": "Commerce de gros (commerce interentreprises) de fournitures et équipements industriels divers",
       "adresse": "99 RUE PIERRE CORNEILLE 69003 LYON",
       "minutes_a_pied": 14,
-      "distance_km": 0.83
+      "distance_km": 0.83,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "955504097",
@@ -1075,7 +1170,9 @@
       "activite": "Location de logements",
       "adresse": "14 RUE TRONCHET 69006 LYON",
       "minutes_a_pied": 15,
-      "distance_km": 0.837
+      "distance_km": 0.837,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "421575820",
@@ -1099,7 +1196,9 @@
       "activite": "Hébergement médicalisé pour personnes âgées",
       "adresse": "17 RUE SAINT FRANCOIS D'ASSISE 69001 LYON",
       "minutes_a_pied": 15,
-      "distance_km": 0.838
+      "distance_km": 0.838,
+      "statut": "reclasser",
+      "motif": "lieu de vie : la cible est le resident, pas le salarie"
     },
     {
       "siren": "791354871",
@@ -1123,7 +1222,9 @@
       "activite": "Programmation informatique",
       "adresse": "73 RUE DE LA REPUBLIQUE 69002 LYON",
       "minutes_a_pied": 15,
-      "distance_km": 0.844
+      "distance_km": 0.844,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "348991555",
@@ -1147,7 +1248,9 @@
       "activite": "Commerce de détail d'habillement en magasin spécialisé",
       "adresse": "71 ET 73 RUE DE LA REPUBLIQUE 69002 LYON",
       "minutes_a_pied": 15,
-      "distance_km": 0.844
+      "distance_km": 0.844,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "832810337",
@@ -1171,7 +1274,9 @@
       "activite": "Restauration traditionnelle",
       "adresse": "3 COUR SAINT-HENRI 69002 LYON",
       "minutes_a_pied": 15,
-      "distance_km": 0.863
+      "distance_km": 0.863,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "351164488",
@@ -1195,7 +1300,9 @@
       "activite": "Commerce de détail d'articles de sport en magasin spécialisé",
       "adresse": "62 RUE DE LA REPUBLIQUE 69002 LYON",
       "minutes_a_pied": 15,
-      "distance_km": 0.864
+      "distance_km": 0.864,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "420934960",
@@ -1219,7 +1326,9 @@
       "activite": "Ingénierie, études techniques",
       "adresse": "GRAND HOTEL DIEU 3 PLACE PASCALON 69002 LYON",
       "minutes_a_pied": 15,
-      "distance_km": 0.866
+      "distance_km": 0.866,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "483993226",
@@ -1243,7 +1352,9 @@
       "activite": "Conseil en systèmes et logiciels informatiques",
       "adresse": "WOJO GRAND HOTEL 4 PLACE AMEDEE BONNET 69002 LYON",
       "minutes_a_pied": 15,
-      "distance_km": 0.866
+      "distance_km": 0.866,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "793744699",
@@ -1267,7 +1378,9 @@
       "activite": "Conseil pour les affaires et autres conseils de gestion",
       "adresse": "9 PLACE AMEDEE BONNET 69002 LYON",
       "minutes_a_pied": 15,
-      "distance_km": 0.866
+      "distance_km": 0.866,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "831001334",
@@ -1291,7 +1404,9 @@
       "activite": "Traitement de données, hébergement et activités connexes",
       "adresse": "BATIMENT LE GRAND HOTEL DIEU 4 PLACE AMEDEE BONNET 69002 LYON",
       "minutes_a_pied": 15,
-      "distance_km": 0.866
+      "distance_km": 0.866,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "384956884",
@@ -1315,7 +1430,9 @@
       "activite": "Activités des agents et courtiers d'assurances",
       "adresse": "GRAND HOTEL DIEU 9 PLACE AMEDEE BONNET 69002 LYON",
       "minutes_a_pied": 15,
-      "distance_km": 0.866
+      "distance_km": 0.866,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "413748062",
@@ -1339,7 +1456,9 @@
       "activite": "Enseignement supérieur",
       "adresse": "6 PLACE SAINT NIZIER 69002 LYON",
       "minutes_a_pied": 5,
-      "distance_km": 0.305
+      "distance_km": 0.305,
+      "statut": "reclasser",
+      "motif": "etablissement d enseignement : la cible est l eleve, pas le salarie"
     },
     {
       "siren": "919434894",
@@ -1363,7 +1482,9 @@
       "activite": "Commerce de gros (commerce interentreprises) de parfumerie et de produits de beauté",
       "adresse": "69 RUE PRESIDENT EDOUARD HERRIOT 69002 LYON",
       "minutes_a_pied": 10,
-      "distance_km": 0.595
+      "distance_km": 0.595,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "957508088",
@@ -1387,7 +1508,9 @@
       "activite": "Location de logements",
       "adresse": "23 RUE RENE LEYNAUD 69001 LYON",
       "minutes_a_pied": 7,
-      "distance_km": 0.388
+      "distance_km": 0.388,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "529602161",
@@ -1411,7 +1534,9 @@
       "activite": "Programmation informatique",
       "adresse": "18 RUE CHILDEBERT 69002 LYON",
       "minutes_a_pied": 13,
-      "distance_km": 0.724
+      "distance_km": 0.724,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "331888990",
@@ -1435,7 +1560,9 @@
       "activite": "Photocopie, préparation de documents et autres activités spécialisées de soutien de bureau",
       "adresse": "52 RUE DE LA REPUBLIQUE 69002 LYON",
       "minutes_a_pied": 14,
-      "distance_km": 0.792
+      "distance_km": 0.792,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "326817467",
@@ -1459,7 +1586,9 @@
       "activite": "Autres activités auxiliaires de services financiers, hors assurance et caisses de retraite, n.c.a.",
       "adresse": "LYON REPUBLIQUE BATIMENT A ET B 8 RUE DE LA REPUBLIQUE 69001 LYON",
       "minutes_a_pied": 1,
-      "distance_km": 0.082
+      "distance_km": 0.082,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "829579549",
@@ -1483,7 +1612,9 @@
       "activite": "Activités spécialisées, scientifiques et techniques diverses",
       "adresse": "4 RUE DE LA BOURSE 69001 LYON",
       "minutes_a_pied": 3,
-      "distance_km": 0.153
+      "distance_km": 0.153,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "819999194",
@@ -1507,7 +1638,9 @@
       "activite": "Activités des sièges sociaux",
       "adresse": "7 QUAI JEAN MOULIN 69001 LYON",
       "minutes_a_pied": 4,
-      "distance_km": 0.206
+      "distance_km": 0.206,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "444211163",
@@ -1531,7 +1664,9 @@
       "activite": "Conseil en relations publiques et communication",
       "adresse": "2 PLACE DE LA BOURSE 69002 LYON",
       "minutes_a_pied": 4,
-      "distance_km": 0.235
+      "distance_km": 0.235,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "326280096",
@@ -1555,7 +1690,9 @@
       "activite": "Formation continue d'adultes",
       "adresse": "19 PLACE MARECHAL LYAUTEY 69006 LYON",
       "minutes_a_pied": 9,
-      "distance_km": 0.517
+      "distance_km": 0.517,
+      "statut": "a_appeler",
+      "motif": "antenne de formation, effectif estime a fiabiliser"
     },
     {
       "siren": "417810538",
@@ -1579,7 +1716,9 @@
       "activite": "Gestion de fonds",
       "adresse": "67 RUE PRESIDENT EDOUARD HERRIOT 69002 LYON",
       "minutes_a_pied": 10,
-      "distance_km": 0.584
+      "distance_km": 0.584,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "794268136",
@@ -1603,7 +1742,9 @@
       "activite": "Nettoyage courant des bâtiments",
       "adresse": "32 RUE MALESHERBES 69006 LYON",
       "minutes_a_pied": 12,
-      "distance_km": 0.717
+      "distance_km": 0.717,
+      "statut": "exclu",
+      "motif": "agents de proprete chez les clients"
     },
     {
       "siren": "821001336",
@@ -1627,7 +1768,9 @@
       "activite": "Analyses, essais et inspections techniques",
       "adresse": "103 RUE VENDOME 69006 LYON",
       "minutes_a_pied": 14,
-      "distance_km": 0.795
+      "distance_km": 0.795,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "310838370",
@@ -1651,7 +1794,9 @@
       "activite": "Gestion de salles de spectacles",
       "adresse": "4 MONTEE DES CHAZEAUX 69005 LYON",
       "minutes_a_pied": 15,
-      "distance_km": 0.864
+      "distance_km": 0.864,
+      "statut": "exclu",
+      "motif": "propose deja des activites musicales, hors Presqu ile"
     },
     {
       "siren": "302695937",
@@ -1675,7 +1820,9 @@
       "activite": "Autres intermédiations monétaires",
       "adresse": "7 RUE DE BONNEL 69003 LYON",
       "minutes_a_pied": 14,
-      "distance_km": 0.806
+      "distance_km": 0.806,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "322706136",
@@ -1699,7 +1846,9 @@
       "activite": "Hébergement touristique et autre hébergement de courte durée",
       "adresse": "CLUB VILLEMANZY 21 MONTEE SAINT SEBASTIEN 69001 LYON",
       "minutes_a_pied": 10,
-      "distance_km": 0.59
+      "distance_km": 0.59,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "449658400",
@@ -1723,7 +1872,9 @@
       "activite": "Autre mise à disposition de ressources humaines",
       "adresse": "51 AVENUE MARECHAL FOCH 69006 LYON",
       "minutes_a_pied": 13,
-      "distance_km": 0.777
+      "distance_km": 0.777,
+      "statut": "exclu",
+      "motif": "mise a disposition de personnel"
     },
     {
       "siren": "408814705",
@@ -1747,7 +1898,9 @@
       "activite": "Hébergement social pour handicapés mentaux et malades mentaux",
       "adresse": "16 RUE PIZAY 69001 LYON",
       "minutes_a_pied": 1,
-      "distance_km": 0.044
+      "distance_km": 0.044,
+      "statut": "reclasser",
+      "motif": "lieu de vie : la cible est le resident, pas le salarie"
     },
     {
       "siren": "642017834",
@@ -1771,7 +1924,9 @@
       "activite": "Crédit-bail",
       "adresse": "10 RUE DU BAT D'ARGENT 69001 LYON",
       "minutes_a_pied": 1,
-      "distance_km": 0.076
+      "distance_km": 0.076,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "312326978",
@@ -1795,7 +1950,9 @@
       "activite": "Autres commerces de détail spécialisés divers",
       "adresse": "14 RUE DE LA REPUBLIQUE 69002 LYON",
       "minutes_a_pied": 3,
-      "distance_km": 0.167
+      "distance_km": 0.167,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "323317032",
@@ -1819,7 +1976,9 @@
       "activite": "Autres intermédiations monétaires",
       "adresse": "6 RUE DE LA BOURSE 69001 LYON",
       "minutes_a_pied": 3,
-      "distance_km": 0.169
+      "distance_km": 0.169,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "538362799",
@@ -1843,7 +2002,9 @@
       "activite": "Ingénierie, études techniques",
       "adresse": "7 QUAI JEAN MOULIN 69001 LYON",
       "minutes_a_pied": 4,
-      "distance_km": 0.206
+      "distance_km": 0.206,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "877566901",
@@ -1867,7 +2028,9 @@
       "activite": "Commerce de détail d'habillement en magasin spécialisé",
       "adresse": "31 RUE PRESIDENT EDOUARD HERRIOT 69002 LYON",
       "minutes_a_pied": 4,
-      "distance_km": 0.21
+      "distance_km": 0.21,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "517637971",
@@ -1891,7 +2054,9 @@
       "activite": "Conseil pour les affaires et autres conseils de gestion",
       "adresse": "3 QUAI JEAN MOULIN 69001 LYON",
       "minutes_a_pied": 4,
-      "distance_km": 0.219
+      "distance_km": 0.219,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "413824319",
@@ -1915,7 +2080,9 @@
       "activite": "Travaux de démolition",
       "adresse": "ETAGE 2 - LE 144 COWORK CS 70297 45 RUE DE LA BOURSE 69002 LYON",
       "minutes_a_pied": 5,
-      "distance_km": 0.288
+      "distance_km": 0.288,
+      "statut": "exclu",
+      "motif": "compagnons sur chantiers"
     },
     {
       "siren": "323390161",
@@ -1939,7 +2106,9 @@
       "activite": "Autres organisations fonctionnant par adhésion volontaire",
       "adresse": "7 PLACE DU GRIFFON 69001 LYON",
       "minutes_a_pied": 5,
-      "distance_km": 0.309
+      "distance_km": 0.309,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "440290070",
@@ -1963,7 +2132,9 @@
       "activite": "Organisation de foires, salons professionnels et congrès",
       "adresse": "1 PLACE TOBIE ROBATEL 69001 LYON",
       "minutes_a_pied": 5,
-      "distance_km": 0.316
+      "distance_km": 0.316,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "481431666",
@@ -1987,7 +2158,9 @@
       "activite": "Agences immobilières",
       "adresse": "20 QUAI JEAN MOULIN 69002 LYON",
       "minutes_a_pied": 6,
-      "distance_km": 0.321
+      "distance_km": 0.321,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "303656375",
@@ -2011,7 +2184,9 @@
       "activite": "Commerce de gros (commerce interentreprises) de boissons",
       "adresse": "41 - 43-IMMEUBLE COEUR PRESQU'ILE 41 RUE PRESIDENT EDOUARD HERRIOT 69002 LYON",
       "minutes_a_pied": 6,
-      "distance_km": 0.342
+      "distance_km": 0.342,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "399223437",
@@ -2035,7 +2210,9 @@
       "activite": "Gestion de fonds",
       "adresse": "41 RUE GRENETTE 69002 LYON",
       "minutes_a_pied": 6,
-      "distance_km": 0.344
+      "distance_km": 0.344,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "542104245",
@@ -2059,7 +2236,9 @@
       "activite": "Autres intermédiations monétaires",
       "adresse": "1 PLACE DES CORDELIERS 69002 LYON",
       "minutes_a_pied": 6,
-      "distance_km": 0.348
+      "distance_km": 0.348,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "775647449",
@@ -2083,7 +2262,9 @@
       "activite": "Autres organisations fonctionnant par adhésion volontaire",
       "adresse": "25 QUAI JEAN MOULIN 69002 LYON",
       "minutes_a_pied": 6,
-      "distance_km": 0.359
+      "distance_km": 0.359,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "652027384",
@@ -2107,7 +2288,9 @@
       "activite": "Courtage de valeurs mobilières et de marchandises",
       "adresse": "2 RUE GROLEE 69002 LYON",
       "minutes_a_pied": 7,
-      "distance_km": 0.38
+      "distance_km": 0.38,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "438843096",
@@ -2131,7 +2314,9 @@
       "activite": "Commerce de détail d'habillement en magasin spécialisé",
       "adresse": "56 RUE PRESIDENT EDOUARD HERRIOT 69002 LYON",
       "minutes_a_pied": 7,
-      "distance_km": 0.392
+      "distance_km": 0.392,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "790058572",
@@ -2155,7 +2340,9 @@
       "activite": "Supérettes",
       "adresse": "3 GRANDE RUE DES FEUILLANTS 69001 LYON",
       "minutes_a_pied": 7,
-      "distance_km": 0.43
+      "distance_km": 0.43,
+      "statut": "a_appeler",
+      "motif": "siege de cooperative, personnel de bureau"
     },
     {
       "siren": "393712286",
@@ -2179,7 +2366,9 @@
       "activite": "Commerce de détail de parfumerie et de produits de beauté en magasin spécialisé",
       "adresse": "66 RUE PRESIDENT EDOUARD HERRIOT 69002 LYON",
       "minutes_a_pied": 8,
-      "distance_km": 0.476
+      "distance_km": 0.476,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "449198050",
@@ -2203,7 +2392,9 @@
       "activite": "Activités juridiques",
       "adresse": "12 QUAI ANDRE LASSAGNE 69001 LYON",
       "minutes_a_pied": 9,
-      "distance_km": 0.491
+      "distance_km": 0.491,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "428559967",
@@ -2227,7 +2418,9 @@
       "activite": "Commerce de détail d'articles de sport en magasin spécialisé",
       "adresse": "32 RUE DE LA REPUBLIQUE 69002 LYON",
       "minutes_a_pied": 9,
-      "distance_km": 0.517
+      "distance_km": 0.517,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "311127278",
@@ -2251,7 +2444,9 @@
       "activite": "Hébergement touristique et autre hébergement de courte durée",
       "adresse": "2 RUE THOMASSIN 69002 LYON",
       "minutes_a_pied": 10,
-      "distance_km": 0.579
+      "distance_km": 0.579,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "402069710",
@@ -2275,7 +2470,9 @@
       "activite": "Hôtels et hébergement similaire",
       "adresse": "4 RUE DE JUSSIEU 69002 LYON",
       "minutes_a_pied": 11,
-      "distance_km": 0.625
+      "distance_km": 0.625,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "519037584",
@@ -2299,7 +2496,9 @@
       "activite": "Transport ferroviaire interurbain de voyageurs",
       "adresse": "11 B PLACE SAINT PAUL 69005 LYON",
       "minutes_a_pied": 11,
-      "distance_km": 0.629
+      "distance_km": 0.629,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "889471058",
@@ -2323,7 +2522,9 @@
       "activite": "Hébergement médicalisé pour personnes âgées",
       "adresse": "21 RUE CUVIER 69006 LYON",
       "minutes_a_pied": 11,
-      "distance_km": 0.663
+      "distance_km": 0.663,
+      "statut": "reclasser",
+      "motif": "lieu de vie : la cible est le resident, pas le salarie"
     },
     {
       "siren": "382597821",
@@ -2347,7 +2548,9 @@
       "activite": "Autres commerces de détail alimentaires en magasin spécialisé",
       "adresse": "4 PLACE DES JACOBINS 69002 LYON",
       "minutes_a_pied": 12,
-      "distance_km": 0.675
+      "distance_km": 0.675,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "484644943",
@@ -2371,7 +2574,9 @@
       "activite": "Accueil de jeunes enfants",
       "adresse": "28 RUE BUGEAUD 69006 LYON",
       "minutes_a_pied": 12,
-      "distance_km": 0.675
+      "distance_km": 0.675,
+      "statut": "exclu",
+      "motif": "garde a domicile, pas une creche"
     },
     {
       "siren": "775658354",
@@ -2395,7 +2600,9 @@
       "activite": "Activités des agences de presse",
       "adresse": "10 RUE STELLA 69002 LYON",
       "minutes_a_pied": 12,
-      "distance_km": 0.684
+      "distance_km": 0.684,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "403259138",
@@ -2419,7 +2626,9 @@
       "activite": "Commerce de détail d'habillement en magasin spécialisé",
       "adresse": "48 RUE DE LA REPUBLIQUE 69002 LYON",
       "minutes_a_pied": 13,
-      "distance_km": 0.736
+      "distance_km": 0.736,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "344738976",
@@ -2443,7 +2652,9 @@
       "activite": "Conseil pour les affaires et autres conseils de gestion",
       "adresse": "24 RUE CHILDEBERT 69002 LYON",
       "minutes_a_pied": 13,
-      "distance_km": 0.738
+      "distance_km": 0.738,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "775672272",
@@ -2467,7 +2678,9 @@
       "activite": "Accueil de jeunes enfants",
       "adresse": "7 RUE DE SAVOIE 69002 LYON",
       "minutes_a_pied": 13,
-      "distance_km": 0.747
+      "distance_km": 0.747,
+      "statut": "reclasser",
+      "motif": "creche : la cible est l enfant et sa famille"
     },
     {
       "siren": "817518244",
@@ -2491,7 +2704,9 @@
       "activite": "Restauration de type rapide",
       "adresse": "63 RUE DE LA REPUBLIQUE 69002 LYON",
       "minutes_a_pied": 13,
-      "distance_km": 0.762
+      "distance_km": 0.762,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "338253131",
@@ -2515,7 +2730,9 @@
       "activite": "Restauration collective sous contrat",
       "adresse": "LAZARISTES ASSOC GESTION 24 MONTEE SAINT BARTHELEMY 69005 LYON",
       "minutes_a_pied": 13,
-      "distance_km": 0.767
+      "distance_km": 0.767,
+      "statut": "exclu",
+      "motif": "restauration collective : equipes chez les clients"
     },
     {
       "siren": "779876184",
@@ -2539,7 +2756,9 @@
       "activite": "Accueil de jeunes enfants",
       "adresse": "13 ET 15 13 RUE VAUCANSON 69001 LYON",
       "minutes_a_pied": 13,
-      "distance_km": 0.772
+      "distance_km": 0.772,
+      "statut": "reclasser",
+      "motif": "creche : la cible est l enfant et sa famille"
     },
     {
       "siren": "445330103",
@@ -2563,7 +2782,9 @@
       "activite": "Restauration de type rapide",
       "adresse": "65 RUE DE LA REPUBLIQUE 69002 LYON",
       "minutes_a_pied": 13,
-      "distance_km": 0.777
+      "distance_km": 0.777,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "340867621",
@@ -2587,7 +2808,9 @@
       "activite": "Hébergement social pour handicapés mentaux et malades mentaux",
       "adresse": "20 RUE DES PIERRES PLANTEES 69001 LYON",
       "minutes_a_pied": 14,
-      "distance_km": 0.779
+      "distance_km": 0.779,
+      "statut": "reclasser",
+      "motif": "lieu de vie : la cible est le resident, pas le salarie"
     },
     {
       "siren": "449158898",
@@ -2611,7 +2834,9 @@
       "activite": "Commerce de détail d'habillement en magasin spécialisé",
       "adresse": "ET 8 RUE EMILE ZOLA 5 RUE DES ARCHERS 69002 LYON",
       "minutes_a_pied": 14,
-      "distance_km": 0.799
+      "distance_km": 0.799,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "696520410",
@@ -2635,7 +2860,9 @@
       "activite": "Commerce de détail de maroquinerie et d'articles de voyage",
       "adresse": "96 RUE PRESIDENT EDOUARD HERRIOT 69002 LYON",
       "minutes_a_pied": 14,
-      "distance_km": 0.821
+      "distance_km": 0.821,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "378702674",
@@ -2659,7 +2886,9 @@
       "activite": "Autres commerces de détail spécialisés divers",
       "adresse": "ET N 60 58 RUE DE LA REPUBLIQUE 69002 LYON",
       "minutes_a_pied": 15,
-      "distance_km": 0.842
+      "distance_km": 0.842,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "501602007",
@@ -2683,7 +2912,9 @@
       "activite": "Activités des voyagistes",
       "adresse": "144 RUE VENDOME 69006 LYON",
       "minutes_a_pied": 15,
-      "distance_km": 0.861
+      "distance_km": 0.861,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "350381968",
@@ -2707,7 +2938,9 @@
       "activite": "Edition de logiciels applicatifs",
       "adresse": "GRAND HOTEL DIEU BATIMENT D 4E ETAGE 1 PLACE PASCALON 69002 LYON",
       "minutes_a_pied": 15,
-      "distance_km": 0.866
+      "distance_km": 0.866,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "478386550",
@@ -2731,7 +2964,9 @@
       "activite": "Programmation informatique",
       "adresse": "LE GRAND HOTEL DIEU 1 PLACE PASCALON 69002 LYON",
       "minutes_a_pied": 15,
-      "distance_km": 0.866
+      "distance_km": 0.866,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "417597416",
@@ -2755,7 +2990,9 @@
       "activite": "Commerce de détail d'articles de sport en magasin spécialisé",
       "adresse": "LE GRAND HOTEL DIEU QU JULES COURMONT RUE DE LA BARRE 69002 LYON",
       "minutes_a_pied": 15,
-      "distance_km": 0.868
+      "distance_km": 0.868,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "484511696",
@@ -2779,7 +3016,9 @@
       "activite": "Nettoyage courant des bâtiments",
       "adresse": "18-20 18 RUE TRONCHET 69006 LYON",
       "minutes_a_pied": 15,
-      "distance_km": 0.87
+      "distance_km": 0.87,
+      "statut": "exclu",
+      "motif": "agents de proprete chez les clients"
     },
     {
       "siren": "572149169",
@@ -2803,7 +3042,9 @@
       "activite": "Commerce de détail de pain, pâtisserie et confiserie en magasin spécialisé",
       "adresse": "37 RUE DE LA REPUBLIQUE 69002 LYON",
       "minutes_a_pied": 7,
-      "distance_km": 0.433
+      "distance_km": 0.433,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "819968967",
@@ -2827,7 +3068,9 @@
       "activite": "Activités des sièges sociaux",
       "adresse": "7 QUAI JEAN MOULIN 69001 LYON",
       "minutes_a_pied": 4,
-      "distance_km": 0.206
+      "distance_km": 0.206,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "444256986",
@@ -2851,7 +3094,9 @@
       "activite": "Commerce d'électricité",
       "adresse": "IMMEUBLE  LE CESAR 20 PLACE LOUIS PRADEL 69001 LYON",
       "minutes_a_pied": 5,
-      "distance_km": 0.275
+      "distance_km": 0.275,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "378469878",
@@ -2875,7 +3120,9 @@
       "activite": "Administration publique (tutelle) des activités économiques",
       "adresse": "20 RUE DE LA BOURSE 69002 LYON",
       "minutes_a_pied": 5,
-      "distance_km": 0.3
+      "distance_km": 0.3,
+      "statut": "a_appeler",
+      "motif": "association loi 1901, CSE comme tout employeur"
     },
     {
       "siren": "507679025",
@@ -2899,7 +3146,9 @@
       "activite": "Vente à distance sur catalogue spécialisé",
       "adresse": "6-8 6 RUE PRESIDENT CARNOT 69002 LYON",
       "minutes_a_pied": 9,
-      "distance_km": 0.522
+      "distance_km": 0.522,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "400102349",
@@ -2923,7 +3172,9 @@
       "activite": "Commerce de gros (commerce interentreprises) de textiles",
       "adresse": "33 RUE DE BREST 69002 LYON",
       "minutes_a_pied": 9,
-      "distance_km": 0.538
+      "distance_km": 0.538,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "505480137",
@@ -2947,7 +3198,9 @@
       "activite": "Commerce de détail de textiles en magasin spécialisé",
       "adresse": "41 RUE DE BREST 69002 LYON",
       "minutes_a_pied": 10,
-      "distance_km": 0.605
+      "distance_km": 0.605,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "428167910",
@@ -2971,7 +3224,9 @@
       "activite": "Services administratifs combinés de bureau",
       "adresse": "55 RUE DE LA REPUBLIQUE 69002 LYON",
       "minutes_a_pied": 12,
-      "distance_km": 0.676
+      "distance_km": 0.676,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "492381157",
@@ -2995,7 +3250,9 @@
       "activite": "Ingénierie, études techniques",
       "adresse": "1ER ETAGE 1 PLACE AMEDEE BONNET 69002 LYON",
       "minutes_a_pied": 15,
-      "distance_km": 0.866
+      "distance_km": 0.866,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "378016604",
@@ -3019,7 +3276,9 @@
       "activite": "Conseil pour les affaires et autres conseils de gestion",
       "adresse": "1ER ETAGE 2 PLACE DE LA BOURSE 69002 LYON",
       "minutes_a_pied": 4,
-      "distance_km": 0.235
+      "distance_km": 0.235,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "784347387",
@@ -3043,7 +3302,9 @@
       "activite": "Activités des organisations et organismes extraterritoriaux",
       "adresse": "24 RUE CHILDEBERT 69002 LYON",
       "minutes_a_pied": 13,
-      "distance_km": 0.738
+      "distance_km": 0.738,
+      "statut": "exclu",
+      "motif": "statut diplomatique, droit du travail francais non applicable"
     },
     {
       "siren": "784656423",
@@ -3067,7 +3328,9 @@
       "activite": "Activités des organisations et organismes extraterritoriaux",
       "adresse": "7 RUE VAUBAN 69006 LYON",
       "minutes_a_pied": 10,
-      "distance_km": 0.593
+      "distance_km": 0.593,
+      "statut": "exclu",
+      "motif": "statut diplomatique, droit du travail francais non applicable"
     },
     {
       "siren": "817451313",
@@ -3091,7 +3354,9 @@
       "activite": "Programmation informatique",
       "adresse": "3 RUE DE LA REPUBLIQUE 69001 LYON",
       "minutes_a_pied": 1,
-      "distance_km": 0.083
+      "distance_km": 0.083,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "389509373",
@@ -3115,7 +3380,9 @@
       "activite": "Commerce de détail d'ordinateurs, d'unités périphériques et de logiciels en magasin spécialisé",
       "adresse": "5 QUAI GENERAL SARRAIL 69006 LYON",
       "minutes_a_pied": 8,
-      "distance_km": 0.484
+      "distance_km": 0.484,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "328998208",
@@ -3139,7 +3406,9 @@
       "activite": "Laboratoires d'analyses médicales",
       "adresse": "42 PLACE DE LA REPUBLIQUE 69002 LYON",
       "minutes_a_pied": 11,
-      "distance_km": 0.626
+      "distance_km": 0.626,
+      "statut": "a_appeler",
+      "motif": "laboratoire : techniciens sur site"
     },
     {
       "siren": "402467120",
@@ -3163,7 +3432,9 @@
       "activite": "Commerce de détail de meubles",
       "adresse": "77 RUE PRESIDENT EDOUARD HERRIOT 69002 LYON",
       "minutes_a_pied": 12,
-      "distance_km": 0.667
+      "distance_km": 0.667,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "402636757",
@@ -3187,7 +3458,9 @@
       "activite": "Autres commerces de détail spécialisés divers",
       "adresse": "23-25 23 RUE DU PORT DU TEMPLE 69002 LYON",
       "minutes_a_pied": 12,
-      "distance_km": 0.689
+      "distance_km": 0.689,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "702038464",
@@ -3211,7 +3484,9 @@
       "activite": "Commerce de gros (commerce interentreprises) de parfumerie et de produits de beauté",
       "adresse": "95 RUE PRESIDENT EDOUARD HERRIOT 69002 LYON",
       "minutes_a_pied": 14,
-      "distance_km": 0.828
+      "distance_km": 0.828,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "793790619",
@@ -3235,7 +3510,9 @@
       "activite": "Enseignement supérieur",
       "adresse": "62 RUE DE LA REPUBLIQUE 69002 LYON",
       "minutes_a_pied": 15,
-      "distance_km": 0.864
+      "distance_km": 0.864,
+      "statut": "reclasser",
+      "motif": "etablissement d enseignement : la cible est l eleve, pas le salarie"
     },
     {
       "siren": "438049843",
@@ -3259,7 +3536,9 @@
       "activite": "Édition de journaux",
       "adresse": "19 RUE PRESIDENT EDOUARD HERRIOT 69001 LYON",
       "minutes_a_pied": 2,
-      "distance_km": 0.127
+      "distance_km": 0.127,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "384006029",
@@ -3283,7 +3562,9 @@
       "activite": "Autres intermédiations monétaires",
       "adresse": "AG 244 7 RUE DE LA REPUBLIQUE 69001 LYON",
       "minutes_a_pied": 1,
-      "distance_km": 0.076
+      "distance_km": 0.076,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "912616307",
@@ -3307,7 +3588,9 @@
       "activite": "Édition de jeux électroniques",
       "adresse": "7 RUE DE LA REPUBLIQUE 69001 LYON",
       "minutes_a_pied": 1,
-      "distance_km": 0.076
+      "distance_km": 0.076,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "752959890",
@@ -3331,7 +3614,9 @@
       "activite": "Boulangerie et boulangerie-pâtisserie",
       "adresse": "4 RUE JOSEPH SERLIN 69001 LYON",
       "minutes_a_pied": 2,
-      "distance_km": 0.088
+      "distance_km": 0.088,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "533214003",
@@ -3355,7 +3640,9 @@
       "activite": "Restauration de type rapide",
       "adresse": "2 RUE DE LA REPUBLIQUE 69001 LYON",
       "minutes_a_pied": 2,
-      "distance_km": 0.091
+      "distance_km": 0.091,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "419883814",
@@ -3379,7 +3666,9 @@
       "activite": "Formation continue d'adultes",
       "adresse": "11 RUE DE LA REPUBLIQUE 69001 LYON",
       "minutes_a_pied": 2,
-      "distance_km": 0.096
+      "distance_km": 0.096,
+      "statut": "a_appeler",
+      "motif": "antenne de bureau"
     },
     {
       "siren": "438016909",
@@ -3403,7 +3692,9 @@
       "activite": "Activités des agences de publicité",
       "adresse": "9 RUE DE LA REPUBLIQUE 69002 LYON",
       "minutes_a_pied": 3,
-      "distance_km": 0.16
+      "distance_km": 0.16,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "778147454",
@@ -3427,7 +3718,9 @@
       "activite": "Autres intermédiations monétaires",
       "adresse": "12 RUE DE LA REPUBLIQUE 69002 LYON",
       "minutes_a_pied": 3,
-      "distance_km": 0.171
+      "distance_km": 0.171,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "480449545",
@@ -3451,7 +3744,9 @@
       "activite": "Services d'aménagement paysager",
       "adresse": "3 RUE CHAVANNE 69001 LYON",
       "minutes_a_pied": 4,
-      "distance_km": 0.241
+      "distance_km": 0.241,
+      "statut": "exclu",
+      "motif": "paysagistes sur chantiers"
     },
     {
       "siren": "340110311",
@@ -3475,7 +3770,9 @@
       "activite": "Activités des agences de voyage",
       "adresse": "10 RUE DU GRIFFON 69001 LYON",
       "minutes_a_pied": 5,
-      "distance_km": 0.266
+      "distance_km": 0.266,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "447818600",
@@ -3499,7 +3796,9 @@
       "activite": "Accueil de jeunes enfants",
       "adresse": "15 RUE DE LA POULAILLERIE 69002 LYON",
       "minutes_a_pied": 5,
-      "distance_km": 0.266
+      "distance_km": 0.266,
+      "statut": "reclasser",
+      "motif": "creche : la cible est l enfant et sa famille"
     },
     {
       "siren": "842429185",
@@ -3523,7 +3822,9 @@
       "activite": "Restauration de type rapide",
       "adresse": "1 PLACE D'ALBON 69001 LYON",
       "minutes_a_pied": 5,
-      "distance_km": 0.317
+      "distance_km": 0.317,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "813603347",
@@ -3547,7 +3848,9 @@
       "activite": "Commerce de détail de maroquinerie et d'articles de voyage",
       "adresse": "52 RUE PRESIDENT EDOUARD HERRIOT 69002 LYON",
       "minutes_a_pied": 6,
-      "distance_km": 0.334
+      "distance_km": 0.334,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "408772101",
@@ -3571,7 +3874,9 @@
       "activite": "Commerce de détail d'habillement en magasin spécialisé",
       "adresse": "43-45-ET 44/46 RUE HENRI GERMAIN 43 RUE GRENETTE 69002 LYON",
       "minutes_a_pied": 6,
-      "distance_km": 0.344
+      "distance_km": 0.344,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "349052852",
@@ -3595,7 +3900,9 @@
       "activite": "Fonds de placement et entités financières similaires",
       "adresse": "9 RUE GRENETTE 69002 LYON",
       "minutes_a_pied": 6,
-      "distance_km": 0.374
+      "distance_km": 0.374,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "829887454",
@@ -3619,7 +3926,9 @@
       "activite": "Commerce de détail d'habillement en magasin spécialisé",
       "adresse": "9 RUE GRENETTE 69002 LYON",
       "minutes_a_pied": 6,
-      "distance_km": 0.374
+      "distance_km": 0.374,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "422399238",
@@ -3643,7 +3952,9 @@
       "activite": "Conseil pour les affaires et autres conseils de gestion",
       "adresse": "1 PLACE FRANCISQUE REGAUD 69002 LYON",
       "minutes_a_pied": 7,
-      "distance_km": 0.376
+      "distance_km": 0.376,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "317586220",
@@ -3667,7 +3978,9 @@
       "activite": "Autres intermédiations monétaires",
       "adresse": "ESPACE CORDELIERS 2 RUE PRESIDENT CARNOT 69002 LYON",
       "minutes_a_pied": 7,
-      "distance_km": 0.409
+      "distance_km": 0.409,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "382401867",
@@ -3691,7 +4004,9 @@
       "activite": "Commerce de détail de la chaussure",
       "adresse": "26 RUE DE LA REPUBLIQUE 69002 LYON",
       "minutes_a_pied": 7,
-      "distance_km": 0.419
+      "distance_km": 0.419,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "398979310",
@@ -3715,7 +4030,9 @@
       "activite": "Commerce de détail d'habillement en magasin spécialisé",
       "adresse": "LE GRAND HOTEL DIEU - ANGLE RUE BARRE QUAI JULES COURMONT 69002 LYON",
       "minutes_a_pied": 7,
-      "distance_km": 0.423
+      "distance_km": 0.423,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "804544674",
@@ -3739,7 +4056,9 @@
       "activite": "Commerce de détail de parfumerie et de produits de beauté en magasin spécialisé",
       "adresse": "58 RUE PRESIDENT EDOUARD HERRIOT 69002 LYON",
       "minutes_a_pied": 7,
-      "distance_km": 0.427
+      "distance_km": 0.427,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "451489017",
@@ -3763,7 +4082,9 @@
       "activite": "Commerce de détail de parfumerie et de produits de beauté en magasin spécialisé",
       "adresse": "37 RUE DE LA REPUBLIQUE 69002 LYON",
       "minutes_a_pied": 7,
-      "distance_km": 0.432
+      "distance_km": 0.432,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "326021177",
@@ -3787,7 +4108,9 @@
       "activite": "Hébergement social pour toxicomanes",
       "adresse": "36 RUE BURDEAU 69001 LYON",
       "minutes_a_pied": 8,
-      "distance_km": 0.441
+      "distance_km": 0.441,
+      "statut": "reclasser",
+      "motif": "lieu de vie : la cible est le resident, pas le salarie"
     },
     {
       "siren": "482930278",
@@ -3811,7 +4134,9 @@
       "activite": "Commerce de détail de meubles",
       "adresse": "6 RUE GROLEE 69002 LYON",
       "minutes_a_pied": 8,
-      "distance_km": 0.454
+      "distance_km": 0.454,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "379587900",
@@ -3835,7 +4160,9 @@
       "activite": "Commerce de détail d'articles d'horlogerie et de bijouterie en magasin spécialisé",
       "adresse": "43 RUE DE LA REPUBLIQUE 69002 LYON",
       "minutes_a_pied": 8,
-      "distance_km": 0.48
+      "distance_km": 0.48,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "499884534",
@@ -3859,7 +4186,9 @@
       "activite": "Conseil en systèmes et logiciels informatiques",
       "adresse": "49 RUE MERCIERE 69002 LYON",
       "minutes_a_pied": 9,
-      "distance_km": 0.495
+      "distance_km": 0.495,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "652023680",
@@ -3883,7 +4212,9 @@
       "activite": "Restauration traditionnelle",
       "adresse": "16 QUAI DE BONDY 69005 LYON",
       "minutes_a_pied": 9,
-      "distance_km": 0.515
+      "distance_km": 0.515,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "315459016",
@@ -3907,7 +4238,9 @@
       "activite": "Activités des agences de voyage",
       "adresse": "5 QUAI JULES COURMONT 69002 LYON",
       "minutes_a_pied": 10,
-      "distance_km": 0.549
+      "distance_km": 0.549,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "349974931",
@@ -3931,7 +4264,9 @@
       "activite": "Autres intermédiations monétaires",
       "adresse": "CREDIT COOPERATIF 15 QUAI DE SERBIE 69006 LYON",
       "minutes_a_pied": 10,
-      "distance_km": 0.551
+      "distance_km": 0.551,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "500483599",
@@ -3955,7 +4290,9 @@
       "activite": "Conseil pour les affaires et autres conseils de gestion",
       "adresse": "68 RUE MERCIERE 69002 LYON",
       "minutes_a_pied": 10,
-      "distance_km": 0.558
+      "distance_km": 0.558,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "415053412",
@@ -3979,7 +4316,9 @@
       "activite": "Commerce de détail de la chaussure",
       "adresse": "10 RUE PRESIDENT CARNOT 69002 LYON",
       "minutes_a_pied": 10,
-      "distance_km": 0.57
+      "distance_km": 0.57,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "520233412",
@@ -4003,7 +4342,9 @@
       "activite": "Activités comptables",
       "adresse": "88 RUE MERCIERE 69002 LYON",
       "minutes_a_pied": 10,
-      "distance_km": 0.591
+      "distance_km": 0.591,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "303376586",
@@ -4027,7 +4368,9 @@
       "activite": "Commerce de détail d'appareils électroménagers en magasin spécialisé",
       "adresse": "12 RUE PRESIDENT CARNOT 69002 LYON",
       "minutes_a_pied": 10,
-      "distance_km": 0.594
+      "distance_km": 0.594,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "348674169",
@@ -4051,7 +4394,9 @@
       "activite": "Commerce de détail de parfumerie et de produits de beauté en magasin spécialisé",
       "adresse": "69 RUE PRESIDENT EDOUARD HERRIOT 69002 LYON",
       "minutes_a_pied": 10,
-      "distance_km": 0.595
+      "distance_km": 0.595,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "442133278",
@@ -4075,7 +4420,9 @@
       "activite": "Commerce de détail d'autres équipements du foyer",
       "adresse": "ANGLE PASSAGE DE L'ARGUE 80 RUE PRESIDENT EDOUARD HERRIOT 69002 LYON",
       "minutes_a_pied": 11,
-      "distance_km": 0.606
+      "distance_km": 0.606,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "818045585",
@@ -4099,7 +4446,9 @@
       "activite": "Vente à distance sur catalogue spécialisé",
       "adresse": "9 RUE GROLEE 69002 LYON",
       "minutes_a_pied": 10,
-      "distance_km": 0.606
+      "distance_km": 0.606,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "505393942",
@@ -4123,7 +4472,9 @@
       "activite": "Autres commerces de détail en magasin non spécialisé",
       "adresse": "53 RUE DE LA REPUBLIQUE 69002 LYON",
       "minutes_a_pied": 11,
-      "distance_km": 0.645
+      "distance_km": 0.645,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "979212883",
@@ -4147,7 +4498,9 @@
       "activite": "Vente à distance sur catalogue général",
       "adresse": "7 COURS DE LA LIBERTE 69003 LYON",
       "minutes_a_pied": 11,
-      "distance_km": 0.658
+      "distance_km": 0.658,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "344748041",
@@ -4171,7 +4524,9 @@
       "activite": "Autres intermédiations monétaires",
       "adresse": "1 COURS FRANKLIN ROOSEVELT 69006 LYON",
       "minutes_a_pied": 12,
-      "distance_km": 0.667
+      "distance_km": 0.667,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "612036376",
@@ -4195,7 +4550,9 @@
       "activite": "Commerce de détail de maroquinerie et d'articles de voyage",
       "adresse": "1 RUE CHILDEBERT 81 RUE PRESIDENT EDOUARD HERRIOT 69002 LYON",
       "minutes_a_pied": 12,
-      "distance_km": 0.701
+      "distance_km": 0.701,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "507642874",
@@ -4219,7 +4576,9 @@
       "activite": "Autres commerces de détail spécialisés divers",
       "adresse": "10 RESIDENCE STELLA 23 RUE CHILDEBERT 69002 LYON",
       "minutes_a_pied": 12,
-      "distance_km": 0.709
+      "distance_km": 0.709,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "450772041",
@@ -4243,7 +4602,9 @@
       "activite": "Commerce de détail d'habillement en magasin spécialisé",
       "adresse": "9 PLACE DES JACOBINS 69002 LYON",
       "minutes_a_pied": 13,
-      "distance_km": 0.725
+      "distance_km": 0.725,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "492787957",
@@ -4267,7 +4628,9 @@
       "activite": "Commerces de détail d'optique",
       "adresse": "61 RUE DE LA REPUBLIQUE 69002 LYON",
       "minutes_a_pied": 13,
-      "distance_km": 0.744
+      "distance_km": 0.744,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "442396032",
@@ -4291,7 +4654,9 @@
       "activite": "Aide à domicile",
       "adresse": "6 RUE BOSSUET 69006 LYON",
       "minutes_a_pied": 13,
-      "distance_km": 0.754
+      "distance_km": 0.754,
+      "statut": "exclu",
+      "motif": "aide a domicile"
     },
     {
       "siren": "521795237",
@@ -4315,7 +4680,9 @@
       "activite": "Commerce de détail de parfumerie et de produits de beauté en magasin spécialisé",
       "adresse": "63 RUE DE LA REPUBLIQUE 69002 LYON",
       "minutes_a_pied": 13,
-      "distance_km": 0.762
+      "distance_km": 0.762,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "520028036",
@@ -4339,7 +4706,9 @@
       "activite": "Photocopie, préparation de documents et autres activités spécialisées de soutien de bureau",
       "adresse": "CLINIQUE ST CHARLES 25 RUE DE FLESSELLES 69001 LYON",
       "minutes_a_pied": 13,
-      "distance_km": 0.766
+      "distance_km": 0.766,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "478777303",
@@ -4363,7 +4732,9 @@
       "activite": "Conseil en systèmes et logiciels informatiques",
       "adresse": "52 RUE DE LA REPUBLIQUE 69002 LYON",
       "minutes_a_pied": 14,
-      "distance_km": 0.792
+      "distance_km": 0.792,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "328759857",
@@ -4387,7 +4758,9 @@
       "activite": "Commerce de détail d'habillement en magasin spécialisé",
       "adresse": "8 RUE DES ARCHERS 69002 LYON",
       "minutes_a_pied": 14,
-      "distance_km": 0.809
+      "distance_km": 0.809,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "304862816",
@@ -4411,7 +4784,9 @@
       "activite": "Photocopie, préparation de documents et autres activités spécialisées de soutien de bureau",
       "adresse": "47 AVENUE MARECHAL DE SAXE 69006 LYON",
       "minutes_a_pied": 14,
-      "distance_km": 0.824
+      "distance_km": 0.824,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "480430875",
@@ -4435,7 +4810,9 @@
       "activite": "Commerce de détail de parfumerie et de produits de beauté en magasin spécialisé",
       "adresse": "71 RUE DE LA REPUBLIQUE 69002 LYON",
       "minutes_a_pied": 14,
-      "distance_km": 0.827
+      "distance_km": 0.827,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "382544310",
@@ -4459,7 +4836,9 @@
       "activite": "Commerce de détail d'habillement en magasin spécialisé",
       "adresse": "12 RUE EMILE ZOLA 69002 LYON",
       "minutes_a_pied": 14,
-      "distance_km": 0.836
+      "distance_km": 0.836,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "483747333",
@@ -4483,7 +4862,9 @@
       "activite": "Autres assurances",
       "adresse": "95 RUE VENDOME 69006 LYON",
       "minutes_a_pied": 15,
-      "distance_km": 0.837
+      "distance_km": 0.837,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "488000969",
@@ -4507,7 +4888,9 @@
       "activite": "Commerce de détail d'autres équipements du foyer",
       "adresse": "73 RUE DE LA REPUBLIQUE 69002 LYON",
       "minutes_a_pied": 15,
-      "distance_km": 0.844
+      "distance_km": 0.844,
+      "statut": "hors_atelier",
+      "motif": "personnel en poste de vente ou en service, horaires decales, CSE national"
     },
     {
       "siren": "775685365",
@@ -4531,7 +4914,9 @@
       "activite": "Autres assurances",
       "adresse": "51 AVENUE MARECHAL DE SAXE 69003 LYON",
       "minutes_a_pied": 15,
-      "distance_km": 0.857
+      "distance_km": 0.857,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "524935855",
@@ -4555,7 +4940,9 @@
       "activite": "Conseil pour les affaires et autres conseils de gestion",
       "adresse": "NEXTDOOR LYON 4 PLACE AMEDEE BONNET 69002 LYON",
       "minutes_a_pied": 15,
-      "distance_km": 0.866
+      "distance_km": 0.866,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "810365817",
@@ -4579,7 +4966,9 @@
       "activite": "Portails Internet",
       "adresse": "GRAND HOTEL-DIEU 4 PLACE AMEDEE BONNET 69002 LYON",
       "minutes_a_pied": 15,
-      "distance_km": 0.866
+      "distance_km": 0.866,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "830337473",
@@ -4603,7 +4992,9 @@
       "activite": "Conseil en systèmes et logiciels informatiques",
       "adresse": "GRAND HOTEL DIEU 4 PLACE AMEDEE BONNET 69002 LYON",
       "minutes_a_pied": 15,
-      "distance_km": 0.866
+      "distance_km": 0.866,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "399528751",
@@ -4627,7 +5018,9 @@
       "activite": "Commerce de gros (commerce interentreprises) de mobilier de bureau",
       "adresse": "6 COUR DU MIDI 69002 LYON",
       "minutes_a_pied": 15,
-      "distance_km": 0.866
+      "distance_km": 0.866,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "954507976",
@@ -4651,7 +5044,9 @@
       "activite": "Autres intermédiations monétaires",
       "adresse": "21 COURS FRANKLIN ROOSEVELT 69006 LYON",
       "minutes_a_pied": 15,
-      "distance_km": 0.868
+      "distance_km": 0.868,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     },
     {
       "siren": "900655986",
@@ -4675,7 +5070,9 @@
       "activite": "Activités juridiques",
       "adresse": "ET RUE DE LA BARRE - GRAND HOTEL DIEU QUAI JULES COURMONT 69002 LYON",
       "minutes_a_pied": 15,
-      "distance_km": 0.868
+      "distance_km": 0.868,
+      "statut": "a_appeler",
+      "motif": "tertiaire de bureau, effectif present sur site"
     }
   ]
 }
