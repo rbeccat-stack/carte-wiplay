@@ -1,0 +1,976 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Radar Presqu'île</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340;0,9..144,440;0,9..144,560;0,9..144,640;1,9..144,340&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#eceef2;
+  --ground:#e4e7ec;
+  --surface:#ffffff;
+  --surface-2:#f4f5f8;
+  --ink:#13151b;
+  --ink-soft:#434956;
+  --muted:#5b6472;
+  --line:#dde1e6;
+  --line-strong:#c7ccd3;
+  --accent:#33469e;
+  --accent-ink:#ffffff;
+  --accent-soft:#e7eaf7;
+  --pri-a:#c8462c;
+  --pri-b:#c98a1f;
+  --pri-c:#2b7684;
+  --ring:#a9b1bd;
+  --ref:#13151b;
+  --water:#d2dce8;
+  --park:#dde6db;
+  --road-a:#ffffff;
+  --road-b:#fafbfc;
+  --road-c:#eef0f4;
+  --shadow:0 10px 30px rgba(20,24,32,.12);
+  --shadow-lg:0 24px 60px rgba(20,24,32,.2);
+  --font-display:'Fraunces',Georgia,serif;
+  --font-body:'IBM Plex Sans',-apple-system,'Segoe UI',sans-serif;
+  --font-mono:'IBM Plex Mono',ui-monospace,Consolas,monospace;
+  --rw-a:3.1px; --rw-b:1.9px; --rw-c:1.3px;
+}
+:root[data-theme="dark"]{
+  --bg:#101318; --ground:#0c0e13; --surface:#171a21; --surface-2:#1c2028;
+  --ink:#edeff3; --ink-soft:#c3c8d1; --muted:#8a909c;
+  --line:#2a2e38; --line-strong:#383d49;
+  --accent:#8391e3; --accent-ink:#0f1115; --accent-soft:rgba(131,145,227,.16);
+  --pri-a:#e8785e; --pri-b:#e6ae4c; --pri-c:#57a9bb;
+  --ring:#3c424f; --ref:#edeff3;
+  --water:#151d28; --park:#141b17;
+  --road-a:#2e3541; --road-b:#242a34; --road-c:#1c2028;
+  --shadow:0 10px 30px rgba(0,0,0,.45); --shadow-lg:0 24px 60px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);
+  -webkit-font-smoothing:antialiased;}
+::selection{background:var(--accent-soft);color:var(--ink);}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px;}
+.app{display:flex;flex-direction:column;height:100vh;min-height:540px;}
+
+.ico{width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;
+  stroke-linecap:round;stroke-linejoin:round;}
+
+.topbar{
+  display:flex;align-items:flex-end;gap:24px;flex-wrap:wrap;
+  padding:15px 22px 14px;border-bottom:1px solid var(--line);background:var(--surface);z-index:20;
+}
+.brand{min-width:0;display:flex;flex-direction:column;gap:3px;}
+.brand h1{font:560 25px/1.05 var(--font-display);margin:0;letter-spacing:-.005em;}
+.lede{margin:0;font-size:13px;color:var(--muted);max-width:68ch;}
+.lede strong{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums;}
+.topactions{display:flex;gap:8px;margin-left:auto;}
+.btn{
+  display:inline-flex;align-items:center;gap:7px;border-radius:9px;cursor:pointer;
+  font:500 13px var(--font-body);padding:8px 13px;border:1px solid var(--line-strong);
+  background:var(--surface);color:var(--ink-soft);transition:background .14s,border-color .14s,color .14s;
+}
+.btn:hover{border-color:var(--accent);color:var(--ink);}
+.btn-primary{
+  background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:600;padding:10px 18px;
+}
+.btn-primary:hover{filter:brightness(1.08);color:var(--accent-ink);}
+.drawer-toggle{display:none;}
+
+.body{display:flex;flex:1;min-height:0;position:relative;}
+
+.sidebar{
+  width:366px;flex:none;background:var(--surface);border-right:1px solid var(--line);
+  display:flex;flex-direction:column;min-height:0;
+}
+.filters{padding:16px 16px 13px;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:13px;}
+.filter-group h2{margin:0 0 8px;font:600 11px var(--font-body);letter-spacing:.07em;
+  text-transform:uppercase;color:var(--muted);}
+.chips{display:flex;flex-wrap:wrap;gap:6px;}
+.chip{
+  border:1px solid var(--line-strong);background:var(--surface);color:var(--ink-soft);
+  font:500 12.5px var(--font-body);padding:6px 11px;border-radius:999px;cursor:pointer;
+  display:inline-flex;align-items:center;gap:6px;user-select:none;
+  transition:background .14s,border-color .14s,color .14s,opacity .14s;
+}
+.chip:hover{border-color:var(--accent);}
+.chip .dot{width:8px;height:8px;border-radius:50%;flex:none;}
+.chip.active{background:var(--accent-soft);border-color:var(--accent);color:var(--ink);}
+.chip.off{opacity:.5;}
+select.sel{
+  width:100%;font:500 12.5px var(--font-body);color:var(--ink);background:var(--surface);
+  border:1px solid var(--line-strong);border-radius:8px;padding:8px 9px;color-scheme:light dark;
+}
+select.sel option{color:var(--ink);background:var(--surface);}
+.switch-row{display:flex;align-items:center;justify-content:space-between;gap:12px;
+  font-size:12.5px;color:var(--ink-soft);}
+.switch{position:relative;width:34px;height:19px;border-radius:999px;background:var(--line-strong);
+  border:none;cursor:pointer;flex:none;transition:background .16s;}
+.switch::after{content:"";position:absolute;top:2px;left:2px;width:15px;height:15px;border-radius:50%;
+  background:var(--surface);transition:transform .16s;}
+.switch.on{background:var(--accent);}
+.switch.on::after{transform:translateX(15px);}
+
+.list-wrap{flex:1;min-height:0;display:flex;flex-direction:column;}
+.list-count{padding:11px 16px 7px;font:500 12.5px var(--font-body);color:var(--muted);
+  font-variant-numeric:tabular-nums;}
+.list{flex:1;overflow-y:auto;overscroll-behavior:contain;padding:2px 8px 14px;scrollbar-width:thin;
+  scrollbar-color:var(--line-strong) transparent;}
+.list::-webkit-scrollbar{width:9px;}
+.list::-webkit-scrollbar-thumb{background:var(--line-strong);border-radius:99px;
+  border:3px solid var(--surface);}
+.card{display:flex;gap:10px;align-items:flex-start;padding:9px 8px;border-radius:9px;cursor:pointer;
+  border:1px solid transparent;}
+.card:hover{background:var(--surface-2);}
+.card.is-active{background:var(--accent-soft);border-color:var(--accent);}
+.card .pdot{width:10px;height:10px;border-radius:50%;margin-top:4px;flex:none;}
+.card .body1{min-width:0;flex:1;}
+.card .name{font:500 13px var(--font-body);color:var(--ink);white-space:nowrap;overflow:hidden;
+  text-overflow:ellipsis;}
+.card .sub{font-size:12.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.card .right{flex:none;text-align:right;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;}
+
+.empty-state{display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px;
+  padding:36px 20px;color:var(--muted);}
+.empty-state .ico{color:var(--line-strong);stroke-width:1.4;}
+.empty-state p{margin:0;font-size:13px;line-height:1.5;max-width:22ch;}
+.card .sal{color:var(--ink-soft);font-weight:500;}
+
+.mapwrap{flex:1;position:relative;min-width:0;overflow:hidden;background:var(--ground);}
+svg#plan{width:100%;height:100%;display:block;cursor:grab;touch-action:none;user-select:none;
+  transition:transform .42s cubic-bezier(.16,1,.3,1);}
+svg#plan.grabbing{cursor:grabbing;}
+.app.briefing svg#plan{transform:scale(.985);}
+
+#bmWater path{fill:var(--water);stroke:none;}
+#bmPark path{fill:var(--park);stroke:none;}
+#bmRoadA path,#bmRoadB path,#bmRoadC path{fill:none;stroke-linecap:round;stroke-linejoin:round;}
+#bmRoadA path{stroke:var(--road-a);stroke-width:var(--rw-a);}
+#bmRoadB path{stroke:var(--road-b);stroke-width:var(--rw-b);}
+#bmRoadC path{stroke:var(--road-c);stroke-width:var(--rw-c);}
+
+.ring-circle{fill:none;stroke:var(--ring);stroke-dasharray:2 6;stroke-linecap:round;stroke-width:1;}
+.map-label{font:500 11px var(--font-body);fill:var(--muted);
+  paint-order:stroke fill;stroke:var(--ground);stroke-width:3.5px;stroke-linejoin:round;}
+.river-label{font-style:italic;font-weight:400;font-size:12px;fill:var(--muted);opacity:.9;}
+.refhalo{fill:var(--accent);opacity:.13;}
+.refdot{fill:var(--ref);stroke:var(--ground);stroke-width:2.5;}
+.reflabel{font:600 12px var(--font-body);fill:var(--ref);
+  paint-order:stroke fill;stroke:var(--ground);stroke-width:3.5px;stroke-linejoin:round;}
+
+.marker{cursor:pointer;}
+.marker circle.body{stroke-width:1.6;}
+.marker.pri-A circle.body{fill:var(--pri-a);stroke:var(--pri-a);}
+.marker.pri-B circle.body{fill:var(--pri-b);stroke:var(--pri-b);}
+.marker.pri-C circle.body{fill:var(--pri-c);stroke:var(--pri-c);}
+.marker.is-active,.marker:hover{transform:scale(1.14);transform-box:fill-box;transform-origin:center;}
+.marker.is-active circle.body,.marker:hover circle.body{stroke:var(--ink);stroke-width:2.2;}
+.marker{transition:transform .13s cubic-bezier(.16,1,.3,1);}
+@media (prefers-reduced-motion:reduce){
+  .marker,svg#plan,.refhalo,.brief,.brief-panel{transition:none!important;animation:none!important;}
+}
+.refhalo{animation:pulse 3s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:.10;r:22}50%{opacity:.2;r:32}}
+
+.mapui{position:absolute;z-index:5;user-select:none;}
+.zoomctrl{right:14px;bottom:14px;display:flex;flex-direction:column;gap:6px;}
+.zoomctrl button{
+  width:34px;height:34px;display:grid;place-items:center;border-radius:9px;
+  border:1px solid var(--line-strong);background:var(--surface);color:var(--ink-soft);
+  cursor:pointer;box-shadow:var(--shadow);transition:color .14s,border-color .14s;
+}
+.zoomctrl button:hover{color:var(--ink);border-color:var(--accent);}
+.compass{left:14px;top:14px;display:flex;align-items:center;gap:5px;font:600 11px var(--font-body);
+  color:var(--ink-soft);background:var(--surface);border:1px solid var(--line);border-radius:9px;
+  padding:6px 9px;box-shadow:var(--shadow);}
+.compass .needle{width:11px;height:11px;fill:currentColor;stroke:none;}
+.scalebar{left:14px;bottom:14px;background:var(--surface);border:1px solid var(--line);border-radius:9px;
+  padding:7px 11px;box-shadow:var(--shadow);font:500 11px var(--font-body);color:var(--ink-soft);
+  font-variant-numeric:tabular-nums;}
+.scalebar .bar{height:3px;background:var(--ink-soft);margin-top:5px;border-radius:2px;}
+
+.legend{right:14px;top:14px;background:var(--surface);border:1px solid var(--line);border-radius:11px;
+  padding:12px 14px;box-shadow:var(--shadow);font-size:12.5px;color:var(--ink-soft);width:184px;}
+.legend h2{margin:0 0 8px;font:600 11px var(--font-body);letter-spacing:.06em;text-transform:uppercase;
+  color:var(--muted);}
+.legend h2 + h2{margin-top:12px;}
+.legend .row{display:flex;align-items:center;gap:8px;margin-bottom:5px;}
+.legend .dot{width:9px;height:9px;border-radius:50%;flex:none;}
+.legend .est-swatch{width:15px;height:15px;border-radius:50%;border:1.6px dashed var(--muted);flex:none;}
+.legend .sizes{display:flex;align-items:flex-end;gap:7px;}
+.legend .sizes i{display:block;border-radius:50%;background:var(--muted);opacity:.5;}
+
+.tooltip{position:fixed;z-index:30;width:288px;background:var(--surface);border:1px solid var(--line);
+  border-radius:13px;box-shadow:var(--shadow-lg);padding:15px 17px;font-size:12.5px;color:var(--ink-soft);}
+.tooltip[hidden]{display:none;}
+.tooltip .tt-close{position:absolute;top:10px;right:11px;border:none;background:none;color:var(--muted);
+  cursor:pointer;padding:2px;display:grid;place-items:center;}
+.tooltip .tt-close:hover{color:var(--ink);}
+.tooltip .tt-top{display:flex;align-items:flex-start;gap:9px;margin-bottom:8px;padding-right:20px;}
+.tooltip .tt-dot{width:10px;height:10px;border-radius:50%;margin-top:5px;flex:none;}
+.tooltip .tt-name{font:500 14.5px var(--font-body);color:var(--ink);line-height:1.25;}
+.tooltip .tt-enseigne{font-size:12.5px;color:var(--muted);}
+.tooltip dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:12px;}
+.tooltip dt{color:var(--muted);}
+.tooltip dd{margin:0;color:var(--ink-soft);text-align:right;font-variant-numeric:tabular-nums;}
+.tooltip .tt-ids{margin-top:10px;padding-top:9px;border-top:1px solid var(--line);
+  font-family:var(--font-mono);font-size:11px;color:var(--muted);}
+.badge{display:inline-block;padding:1px 6px;border-radius:5px;font-size:11px;font-weight:600;}
+.badge.est{background:var(--surface-2);color:var(--muted);border:1px dashed var(--line-strong);}
+.badge.cse-ok{background:var(--accent-soft);color:var(--accent);}
+.badge.cse-tbd{background:var(--surface-2);color:var(--muted);}
+
+.filter-hint{
+  left:50%;bottom:16px;transform:translateX(-50%);width:min(340px,calc(100% - 28px));
+  background:var(--surface);border:1px solid var(--line);border-radius:13px;box-shadow:var(--shadow-lg);
+  padding:15px 17px 16px;z-index:12;
+  animation:hintIn .38s cubic-bezier(.16,1,.3,1);
+}
+@keyframes hintIn{from{opacity:0;transform:translateX(-50%) translateY(10px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+.filter-hint p{margin:0 0 12px;font-size:13px;line-height:1.5;color:var(--ink-soft);padding-right:14px;}
+.filter-hint .filter-hint-close{position:absolute;top:11px;right:12px;border:none;background:none;
+  color:var(--muted);cursor:pointer;padding:2px;display:grid;place-items:center;}
+.filter-hint .filter-hint-close:hover{color:var(--ink);}
+.filter-hint .btn-primary{width:100%;justify-content:center;padding:9px 14px;}
+
+.brief{position:absolute;inset:0;z-index:50;display:flex;align-items:center;padding:28px;
+  background:color-mix(in srgb,var(--ground) 72%,transparent);
+  backdrop-filter:blur(2px);transition:opacity .34s ease,visibility .34s;}
+.brief[hidden]{display:flex;opacity:0;visibility:hidden;pointer-events:none;}
+.brief-panel{width:min(464px,100%);max-height:100%;overflow-y:auto;overscroll-behavior:contain;background:var(--surface);
+  border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow-lg);padding:28px 30px 26px;
+  transition:transform .34s cubic-bezier(.16,1,.3,1),opacity .34s ease;}
+.brief[hidden] .brief-panel{transform:translateY(10px) scale(.98);opacity:0;}
+.brief-panel h2{margin:0 0 12px;font:560 23px/1.15 var(--font-display);color:var(--ink);text-wrap:balance;}
+.brief-panel p{margin:0 0 12px;font-size:14px;line-height:1.62;color:var(--ink-soft);}
+.brief-panel p strong{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums;}
+.brief-panel h3{margin:20px 0 9px;font:600 11px var(--font-body);letter-spacing:.07em;
+  text-transform:uppercase;color:var(--muted);}
+.brief-limits{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:9px;}
+.brief-limits li{position:relative;padding-left:17px;font-size:13.5px;line-height:1.55;color:var(--ink-soft);}
+.brief-limits li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:6px;
+  border-radius:50%;border:1.4px dashed var(--muted);}
+.brief-source{margin-top:24px;font-size:12px;line-height:1.5;color:var(--muted);}
+.brief-actions{margin-top:20px;}
+
+.sidebar-scrim{display:none;}
+
+@media (max-width:940px){
+  .topbar{padding:12px 14px;gap:12px;align-items:flex-start;}
+  .brand h1{font-size:21px;}
+  .lede{font-size:12.5px;}
+  .topactions{margin-left:0;width:100%;}
+  .drawer-toggle{display:inline-flex;}
+  .sidebar{
+    position:fixed;left:0;right:0;bottom:0;top:auto;width:auto;height:74vh;max-height:660px;
+    border-right:none;border-top:1px solid var(--line);border-radius:16px 16px 0 0;
+    transform:translateY(100%);transition:transform .26s cubic-bezier(.16,1,.3,1);z-index:40;
+    box-shadow:0 -12px 34px rgba(0,0,0,.2);
+  }
+  .sidebar.open{transform:translateY(0);}
+  .sidebar-scrim{display:block;position:fixed;inset:0;background:rgba(10,12,16,.4);z-index:35;
+    opacity:0;pointer-events:none;transition:opacity .22s;}
+  .sidebar-scrim.show{opacity:1;pointer-events:auto;}
+  .legend{width:160px;padding:10px 11px;}
+  .brief{padding:16px;align-items:flex-start;}
+  .brief-panel{padding:22px 20px;width:100%;}
+  .brief-panel h2{font-size:20px;}
+}
+@media (max-width:520px){
+  .legend{display:none;}
+}
+</style>
+
+<div class="app briefing" id="app">
+  <header class="topbar">
+    <div class="brand">
+      <h1>Radar Presqu'île</h1>
+      <p class="lede" id="lede"></p>
+    </div>
+    <div class="topactions">
+      <button class="btn" id="openBrief" type="button">
+        <svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.2 2.4h5.1l3.1 3.1v8a.5.5 0 0 1-.5.5H4.2a.5.5 0 0 1-.5-.5V2.9a.5.5 0 0 1 .5-.5Z"/><path d="M9.3 2.4v3.1h3.1M6 9.2h4M6 11.4h2.8"/></svg>
+        Note de méthode
+      </button>
+      <button class="btn drawer-toggle" id="drawerToggle" type="button" aria-expanded="false" aria-controls="sidebar">
+        <svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4.6h12M2 11.4h12"/><circle cx="5.6" cy="4.6" r="1.8"/><circle cx="10.4" cy="11.4" r="1.8"/></svg>
+        Filtres &amp; liste
+      </button>
+    </div>
+  </header>
+
+  <div class="body">
+    <aside class="sidebar" id="sidebar">
+      <div class="filters">
+        <div class="filter-group">
+          <h2>Priorité (effectif sur site)</h2>
+          <div class="chips" id="chipsPriorite"></div>
+        </div>
+        <div class="filter-group">
+          <h2>Interlocuteur</h2>
+          <div class="chips" id="chipsInterlocuteur"></div>
+        </div>
+        <div class="filter-group">
+          <h2>Secteur</h2>
+          <select class="sel" id="selSecteur"></select>
+        </div>
+        <div class="switch-row">
+          <label for="switchEstime">Inclure les effectifs estimés</label>
+          <button class="switch on" id="switchEstime" type="button" role="switch" aria-checked="true"></button>
+        </div>
+      </div>
+      <div class="list-wrap">
+        <p class="list-count" id="listCount"></p>
+        <div class="list" id="list"></div>
+      </div>
+    </aside>
+    <div class="sidebar-scrim" id="scrim"></div>
+
+    <main class="mapwrap">
+      <svg id="plan" viewBox="-1060 -1060 2120 2120" preserveAspectRatio="xMidYMid meet">
+        <g id="viewport">
+          <g id="basemap">
+            <g id="bmWater"></g>
+            <g id="bmPark"></g>
+            <g id="bmRoadC"></g>
+            <g id="bmRoadB"></g>
+            <g id="bmRoadA"></g>
+            <g id="bmLabels"></g>
+          </g>
+          <g id="rings"></g>
+          <g id="markers"></g>
+          <g id="refmarker"></g>
+        </g>
+      </svg>
+
+      <div class="mapui compass">
+        <svg class="needle" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.8 10.6 12.6 8 10.6 5.4 12.6 8 1.8Z"/></svg>
+        Nord
+      </div>
+      <div class="mapui scalebar">
+        <span id="scalebarLabel">200 m</span>
+        <div class="bar" id="scalebarBar" style="width:80px"></div>
+      </div>
+      <div class="mapui legend">
+        <h2>Priorité</h2>
+        <div class="row"><span class="dot" style="background:var(--pri-a)"></span>A · 50 salariés et +</div>
+        <div class="row"><span class="dot" style="background:var(--pri-b)"></span>B · 20 à 49</div>
+        <div class="row"><span class="dot" style="background:var(--pri-c)"></span>C · 10 à 19</div>
+        <h2>Taille du repère</h2>
+        <div class="row sizes">
+          <i style="width:8px;height:8px"></i><i style="width:13px;height:13px"></i><i style="width:19px;height:19px"></i>
+          <span style="margin-left:2px">effectif du site</span>
+        </div>
+        <h2>Fiabilité</h2>
+        <div class="row"><span class="est-swatch"></span>effectif estimé</div>
+      </div>
+      <div class="mapui zoomctrl">
+        <button id="zoomIn" type="button" aria-label="Zoomer">
+          <svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3.4v9.2M3.4 8h9.2"/></svg>
+        </button>
+        <button id="zoomOut" type="button" aria-label="Dézoomer">
+          <svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.4 8h9.2"/></svg>
+        </button>
+        <button id="zoomReset" type="button" aria-label="Recadrer sur le lieu Wiplay">
+          <svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="3.1"/><path d="M8 1.4v2.3M8 12.3v2.3M1.4 8h2.3M12.3 8h2.3"/></svg>
+        </button>
+      </div>
+
+      <div class="tooltip" id="tooltip" hidden></div>
+
+      <div class="mapui filter-hint" id="filterHint" hidden>
+        <button class="filter-hint-close" id="dismissHint" type="button" aria-label="Fermer">
+          <svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.2 4.2l7.6 7.6M11.8 4.2l-7.6 7.6"/></svg>
+        </button>
+        <p>Par défaut, les entreprises sont filtrées avec la priorité A et un CSE d'établissement. Tu peux
+        modifier cela à loisir via la partie supérieure gauche de l'interface.</p>
+        <button class="btn btn-primary" id="showAllFilters" type="button">Tout afficher</button>
+      </div>
+
+      <div class="brief" id="brief" role="dialog" aria-modal="true" aria-labelledby="briefTitle">
+        <div class="brief-panel">
+          <h2 id="briefTitle">Ce que montre cette carte</h2>
+          <div id="briefBody"></div>
+          <h3>Les limites de cette carte</h3>
+          <ul class="brief-limits" id="briefLimits"></ul>
+          <p class="brief-source" id="briefSource"></p>
+          <div class="brief-actions">
+            <button class="btn btn-primary" id="closeBrief" type="button">Explorer la carte</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script>
+const svg = document.getElementById('plan');
+const viewport = document.getElementById('viewport');
+const ringsG = document.getElementById('rings');
+const markersG = document.getElementById('markers');
+const refG = document.getElementById('refmarker');
+const bmLabels = document.getElementById('bmLabels');
+const listEl = document.getElementById('list');
+const tooltip = document.getElementById('tooltip');
+const sidebar = document.getElementById('sidebar');
+const scrim = document.getElementById('scrim');
+const appEl = document.getElementById('app');
+const briefEl = document.getElementById('brief');
+
+const PRI_COLOR = {A:'var(--pri-a)', B:'var(--pri-b)', C:'var(--pri-c)'};
+const MPERDEG_LAT = 111195;
+const WALK_M_PER_MIN = (4.5/1.3)*1000/60;
+const PAN_LIMIT = 900;
+const K_MIN = 0.55, K_MAX = 7;
+
+let DATA=null, points=[], ref=null;
+let markerEls={}, cardEls={}, csEls=[];
+const DEFAULT_INTERLOCUTEUR = "CSE d'établissement";
+let filters={priorite:new Set(['A']), interlocuteur:new Set([DEFAULT_INTERLOCUTEUR]), secteur:'all', estime:true};
+let selectedId=null, hoveredId=null;
+let view={x:0,y:0,k:1}, baseScale=1;
+let ALL_INTERLOCUTEUR=[], hintShown=false;
+
+function project(lat,lng,lat0,lng0){
+  const mPerDegLng = MPERDEG_LAT*Math.cos(lat0*Math.PI/180);
+  return {x:(lng-lng0)*mPerDegLng, y:(lat0-lat)*MPERDEG_LAT};
+}
+const fmtInt = n => n==null ? 'n.c.' : n.toLocaleString('fr-FR');
+const noDash = s => (s||'').replace(/\s[—–]\s/g, ' : ');
+const fmtDist = km => km<1 ? Math.round(km*1000)+' m' : km.toFixed(2).replace('.',',')+' km';
+const fmtCA = v => v==null ? 'n.c.'
+  : v>=1000 ? (v/1000).toFixed(1).replace('.',',')+' Md€' : Math.round(v)+' M€';
+function sizeR(s,minS,maxS){
+  const t = maxS>minS ? Math.sqrt((s-minS)/(maxS-minS)) : 0.5;
+  return 13 + t*33;
+}
+
+async function init(){
+  const [data, basemap] = await Promise.all([
+    fetch('data.json').then(r=>r.json()),
+    fetch('basemap.json').then(r=>r.json()).catch(()=>null)
+  ]);
+  DATA = data;
+  const m = DATA.meta;
+  ref = {lat:m.point_reference.lat, lng:m.point_reference.lng};
+  points = DATA.points.map(p=>{
+    const xy = project(p.lat,p.lng,ref.lat,ref.lng);
+    return {...p, _x:xy.x, _y:xy.y};
+  });
+
+  document.getElementById('lede').innerHTML =
+    `<strong>${m.entreprises_retenues} comptes cibles</strong> : au moins 10 salariés sur site, `
+    + `à ${m.minutes_a_pied_cible} minutes à pied du ${m.point_reference.adresse}`;
+
+  if(basemap) buildBasemap(basemap);
+  buildFilters(DATA.repartition, DATA.legende);
+  buildRings();
+  buildRef();
+  buildMarkers();
+  buildBrief(m);
+  applyFilters();
+  fitInitial();
+  bindMapInteractions();
+  bindUiInteractions();
+}
+
+function pathFromWays(ways, close){
+  let d='';
+  for(const w of ways){
+    d += 'M'+w[0]+' '+w[1];
+    for(let i=2;i<w.length;i+=2) d += 'L'+w[i]+' '+w[i+1];
+    if(close) d += 'Z';
+  }
+  return d;
+}
+function buildBasemap(bm){
+  const layers = [['bmWater','water',true],['bmPark','park',true],
+                  ['bmRoadC','c',false],['bmRoadB','b',false],['bmRoadA','a',false]];
+  for(const [id,key,close] of layers){
+    if(!bm[key] || !bm[key].length) continue;
+    const p = document.createElementNS('http://www.w3.org/2000/svg','path');
+    p.setAttribute('d', pathFromWays(bm[key], close));
+    document.getElementById(id).appendChild(p);
+  }
+  addMapLabel(-620, 300, 'La Saône', 'river-label');
+  addMapLabel(600, 150, 'Le Rhône', 'river-label');
+}
+function addMapLabel(x,y,text,extraClass){
+  const g = document.createElementNS('http://www.w3.org/2000/svg','g');
+  g.setAttribute('class','cscale');
+  g.dataset.x = x; g.dataset.y = y;
+  g.innerHTML = `<text class="map-label ${extraClass||''}" text-anchor="middle">${text}</text>`;
+  bmLabels.appendChild(g);
+  csEls.push(g);
+}
+
+function chipClass(kind, val){
+  return filters[kind].has(val) ? 'chip active' : 'chip off';
+}
+function buildFilters(rep, legende){
+  document.getElementById('chipsPriorite').innerHTML = ['A','B','C'].map(k =>
+    `<button class="${chipClass('priorite',k)}" type="button" aria-pressed="${filters.priorite.has(k)}" data-kind="priorite" data-val="${k}" title="${noDash(legende.priorite[k])}">
+       <span class="dot" style="background:${PRI_COLOR[k]}"></span>${k} · ${rep.par_priorite[k]}</button>`
+  ).join('');
+
+  const interList = Object.keys(rep.par_interlocuteur);
+  ALL_INTERLOCUTEUR = interList;
+  document.getElementById('chipsInterlocuteur').innerHTML = interList.map(k =>
+    `<button class="${chipClass('interlocuteur',k)}" type="button" aria-pressed="${filters.interlocuteur.has(k)}" data-kind="interlocuteur" data-val="${k}" title="${noDash(legende.interlocuteur[k])}">${k} · ${rep.par_interlocuteur[k]}</button>`
+  ).join('');
+
+  const sel = document.getElementById('selSecteur');
+  sel.innerHTML = `<option value="all">Tous les secteurs · ${DATA.meta.entreprises_retenues}</option>` +
+    Object.entries(rep.par_secteur).sort((a,b)=>b[1]-a[1])
+      .map(([s,n])=>`<option value="${s}">${s} · ${n}</option>`).join('');
+
+  document.querySelectorAll('.chip').forEach(chip=>{
+    chip.addEventListener('click', ()=>{
+      const set = filters[chip.dataset.kind], val = chip.dataset.val;
+      const on = !set.has(val);
+      if(on) set.add(val); else set.delete(val);
+      chip.classList.toggle('active', on);
+      chip.classList.toggle('off', !on);
+      chip.setAttribute('aria-pressed', String(on));
+      applyFilters();
+    });
+  });
+  sel.addEventListener('change', ()=>{ filters.secteur = sel.value; applyFilters(); });
+
+  const sw = document.getElementById('switchEstime');
+  sw.addEventListener('click', ()=>{
+    filters.estime = !filters.estime;
+    sw.classList.toggle('on', filters.estime);
+    sw.setAttribute('aria-checked', String(filters.estime));
+    applyFilters();
+  });
+}
+
+function buildRings(){
+  ringsG.innerHTML = [5,10,15].map(min=>{
+    const r = Math.round(min*WALK_M_PER_MIN);
+    return `<circle class="ring-circle" cx="0" cy="0" r="${r}" vector-effect="non-scaling-stroke"></circle>`;
+  }).join('');
+  [5,10,15].forEach(min=>{
+    const r = Math.round(min*WALK_M_PER_MIN);
+    addRingLabel(0, -r, min+' min à pied');
+  });
+}
+function addRingLabel(x,y,text){
+  const g = document.createElementNS('http://www.w3.org/2000/svg','g');
+  g.setAttribute('class','cscale');
+  g.dataset.x = x; g.dataset.y = y;
+  g.innerHTML = `<text class="map-label" text-anchor="middle" dy="4">${text}</text>`;
+  ringsG.appendChild(g);
+  csEls.push(g);
+}
+
+function buildRef(){
+  refG.innerHTML = `
+    <circle class="refhalo" cx="0" cy="0" r="22"></circle>
+    <circle class="refdot" cx="0" cy="0" r="8" vector-effect="non-scaling-stroke"></circle>
+    <g class="cscale" data-x="0" data-y="-17"><text class="reflabel" text-anchor="middle">Wiplay</text></g>
+  `;
+  csEls.push(...refG.querySelectorAll('.cscale'));
+}
+
+function buildMarkers(){
+  const sals = points.map(p=>p.salaries_site);
+  const minS = Math.min(...sals), maxS = Math.max(...sals);
+  markersG.innerHTML = '';
+  points.forEach(p=>{
+    const r = sizeR(p.salaries_site,minS,maxS);
+    const estime = p.effectif_fiabilite==='Estimé';
+    const pos = document.createElementNS('http://www.w3.org/2000/svg','g');
+    pos.setAttribute('transform',`translate(${p._x} ${p._y})`);
+    const g = document.createElementNS('http://www.w3.org/2000/svg','g');
+    g.setAttribute('class',`marker pri-${p.priorite}`);
+    g.dataset.id = p.siret;
+    g.innerHTML = `
+      <circle r="${Math.max(r+10,24)}" fill="transparent"></circle>
+      <circle class="body" r="${r}" fill-opacity="${estime?0.5:0.82}"
+        vector-effect="non-scaling-stroke" ${estime?'stroke-dasharray="3 3"':''}></circle>`;
+    g.addEventListener('click', e=>{ e.stopPropagation(); selectPoint(p.siret, true); });
+    g.addEventListener('mouseenter', ()=>setHover(p.siret));
+    g.addEventListener('mouseleave', ()=>setHover(null));
+    pos.appendChild(g);
+    markersG.appendChild(pos);
+    markerEls[p.siret] = g;
+  });
+}
+
+function buildBrief(m){
+  const d = new Date(m.date_extraction).toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+  document.getElementById('briefBody').innerHTML = `
+    <p><strong>${m.entreprises_retenues} entreprises</strong> d'au moins 10 salariés sur site, dans un rayon de
+    ${Math.round(m.rayon_km*1000)} mètres du 9 rue de l'Arbre Sec. Ce rayon correspond à environ
+    ${m.minutes_a_pied_cible} minutes de marche. En dessous de 10 personnes présentes, un atelier collectif
+    n'est pas viable (je l'ai supposé), donc ces entreprises sont écartées.</p>
+    <p>Chacune est classée par priorité selon l'effectif du site (A à partir de 50 salariés, B de 20 à 49,
+    C de 10 à 19) et par interlocuteur. Un CSE d'établissement, un dirigeant de PME et une direction de site
+    ne s'abordent pas de la même façon&nbsp;: cela pourrait changer le script d'appel (une autre supposition).</p>`;
+  document.getElementById('briefLimits').innerHTML = `
+    <li>Aucune donnée personnelle, aucun contact scrapé&nbsp;: uniquement des données publiques d'entreprise
+    (Sirene).</li>
+    <li><strong>Effectif mesuré</strong>&nbsp;: l'établissement déclare sa propre tranche et je retiens toujours
+    la borne basse. <strong>Effectif estimé</strong> (contour pointillé)&nbsp;: cette tranche n'est pas
+    renseignée, alors j'ai divisé l'effectif de l'entreprise par son nombre de sites ouverts.</li>
+    <li>Aucun registre public des CSE n'existe.&nbsp;«&nbsp;Confirmé&nbsp;» signifie que l'entreprise publie son
+    index égalité professionnelle, obligatoire à partir de 50 salariés. Pour autant,&nbsp;«&nbsp;À vérifier&nbsp;»
+    ne veut pas dire «&nbsp;absent&nbsp;».</li>
+    <li>Les entreprises non diffusibles sont absentes de la source&nbsp;: ${m.entreprises_retenues} est donc
+    un plancher.</li>`;
+  document.getElementById('briefSource').textContent =
+    `Source : API Recherche d'entreprises (base Sirene), extraction du ${d}. Fond de plan : OpenStreetMap.`;
+}
+
+function visibleFor(p){
+  return filters.priorite.has(p.priorite)
+    && filters.interlocuteur.has(p.interlocuteur)
+    && (filters.secteur==='all' || p.secteur===filters.secteur)
+    && (filters.estime || p.effectif_fiabilite!=='Estimé');
+}
+
+function applyFilters(){
+  const visible = points.filter(visibleFor);
+  const ids = new Set(visible.map(p=>p.siret));
+  points.forEach(p=>{ markerEls[p.siret].style.display = ids.has(p.siret) ? '' : 'none'; });
+
+  visible.sort((a,b)=> a.priorite===b.priorite
+    ? b.salaries_site-a.salaries_site
+    : a.priorite.localeCompare(b.priorite));
+  document.getElementById('listCount').textContent =
+    visible.length === points.length
+      ? `${points.length} entreprises`
+      : `${visible.length} entreprises sur ${points.length}`;
+
+  cardEls = {};
+  if(visible.length === 0){
+    listEl.innerHTML = `
+      <div class="empty-state">
+        <svg class="ico" viewBox="0 0 16 16" aria-hidden="true" style="width:22px;height:22px">
+          <circle cx="7" cy="7" r="5"/><path d="M10.6 10.6 14 14M5 7h4"/>
+        </svg>
+        <p>Aucune entreprise ne correspond à ces filtres.</p>
+        <button class="btn" id="clearFilters" type="button">Réinitialiser les filtres</button>
+      </div>`;
+    document.getElementById('clearFilters').addEventListener('click', ()=>{
+      filters.priorite = new Set(['A','B','C']);
+      filters.interlocuteur = new Set(ALL_INTERLOCUTEUR);
+      filters.secteur = 'all';
+      document.getElementById('selSecteur').value = 'all';
+      refreshChipStates();
+      applyFilters();
+    });
+    if(selectedId) closeTooltip();
+    return;
+  }
+  listEl.innerHTML = visible.map(p=>`
+    <div class="card" data-id="${p.siret}" tabindex="0" role="button">
+      <span class="pdot" style="background:${PRI_COLOR[p.priorite]}"></span>
+      <div class="body1">
+        <div class="name">${p.nom}</div>
+        <div class="sub">${p.secteur} · ${p.interlocuteur}</div>
+      </div>
+      <div class="right">
+        <div class="sal">${fmtInt(p.salaries_site)}${p.effectif_fiabilite==='Estimé'?' ~':''}</div>
+        <div>${fmtDist(p.distance_km)}</div>
+      </div>
+    </div>`).join('');
+
+  listEl.querySelectorAll('.card').forEach(card=>{
+    cardEls[card.dataset.id] = card;
+    card.addEventListener('click', ()=>selectPoint(card.dataset.id, true, true));
+    card.addEventListener('keydown', e=>{
+      if(e.key==='Enter'||e.key===' '){ e.preventDefault(); selectPoint(card.dataset.id, true, true); }
+    });
+    card.addEventListener('mouseenter', ()=>setHover(card.dataset.id));
+    card.addEventListener('mouseleave', ()=>setHover(null));
+  });
+  if(selectedId && !ids.has(selectedId)) closeTooltip();
+}
+
+function setHover(id){
+  if(hoveredId && hoveredId!==selectedId){
+    markerEls[hoveredId]?.classList.remove('is-active');
+    cardEls[hoveredId]?.classList.remove('is-active');
+  }
+  hoveredId = id;
+  if(id){
+    markerEls[id]?.classList.add('is-active');
+    cardEls[id]?.classList.add('is-active');
+  }
+}
+
+function selectPoint(id, panTo, fromList){
+  selectedId = id;
+  document.querySelectorAll('.marker.is-active').forEach(m=>m.classList.remove('is-active'));
+  document.querySelectorAll('.card.is-active').forEach(c=>c.classList.remove('is-active'));
+  markerEls[id]?.classList.add('is-active');
+  cardEls[id]?.classList.add('is-active');
+  if(fromList) cardEls[id]?.scrollIntoView({block:'nearest', behavior:'smooth'});
+  const p = points.find(pt=>pt.siret===id);
+  if(panTo && p){
+    view.k = Math.max(view.k, 2.4);
+    view.x = -p._x*view.k;
+    view.y = -p._y*view.k;
+    applyTransform();
+  }
+  showTooltip(p);
+  if(window.innerWidth<=MOBILE_BP) closeDrawer();
+}
+
+function showTooltip(p){
+  if(!p) return;
+  const lg = DATA.legende;
+  tooltip.innerHTML = `
+    <button class="tt-close" type="button" aria-label="Fermer">
+      <svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.2 4.2l7.6 7.6M11.8 4.2l-7.6 7.6"/></svg>
+    </button>
+    <div class="tt-top">
+      <span class="tt-dot" style="background:${PRI_COLOR[p.priorite]}"></span>
+      <div>
+        <div class="tt-name">${p.nom}</div>
+        ${p.enseigne? `<div class="tt-enseigne">${p.enseigne}</div>`:''}
+      </div>
+    </div>
+    <dl>
+      <dt>Effectif site</dt><dd>${fmtInt(p.salaries_site)} ${p.effectif_fiabilite==='Estimé'?'<span class="badge est">estimé</span>':''}</dd>
+      <dt>Effectif entreprise</dt><dd>${fmtInt(p.salaries_entreprise)}</dd>
+      <dt>Secteur</dt><dd>${p.secteur}</dd>
+      <dt>Interlocuteur</dt><dd title="${noDash(lg.interlocuteur[p.interlocuteur])}">${p.interlocuteur}</dd>
+      <dt>CSE</dt><dd><span class="badge ${p.cse==='Confirmé'?'cse-ok':'cse-tbd'}" title="${noDash(lg.cse[p.cse])}">${p.cse}</span></dd>
+      <dt>Site</dt><dd>${p.type_site}${p.sites_en_france>1? ' · '+fmtInt(p.sites_en_france)+' en France':''}</dd>
+      <dt>Chiffre d'affaires</dt><dd>${fmtCA(p.ca_meur)}${p.annee_bilan? ' ('+Math.round(p.annee_bilan)+')':''}</dd>
+      <dt>Adresse</dt><dd>${p.adresse}</dd>
+      <dt>Distance</dt><dd>${fmtDist(p.distance_km)} · ${p.minutes_a_pied} min à pied</dd>
+    </dl>
+    <div class="tt-ids">SIREN ${p.siren} · SIRET ${p.siret}</div>`;
+  tooltip.hidden = false;
+  positionTooltip(p);
+  tooltip.querySelector('.tt-close').addEventListener('click', closeTooltip);
+}
+function positionTooltip(p){
+  const g = markerEls[p.siret];
+  if(!g) return;
+  const screen = new DOMPoint(0,0).matrixTransform(g.getScreenCTM());
+  const mapRect = svg.getBoundingClientRect();
+  const w = 288, h = tooltip.offsetHeight || 300;
+  let left = screen.x + 18, top = screen.y - 12;
+  if(left + w > mapRect.right - 8) left = screen.x - w - 18;
+  if(left < mapRect.left + 8) left = mapRect.left + 8;
+  if(top + h > window.innerHeight - 10) top = window.innerHeight - h - 10;
+  if(top < 10) top = 10;
+  tooltip.style.left = left+'px';
+  tooltip.style.top = top+'px';
+}
+function closeTooltip(){
+  tooltip.hidden = true;
+  selectedId = null;
+  document.querySelectorAll('.marker.is-active').forEach(m=>m.classList.remove('is-active'));
+  document.querySelectorAll('.card.is-active').forEach(c=>c.classList.remove('is-active'));
+}
+
+function clampPan(){
+  const lim = PAN_LIMIT*view.k;
+  view.x = Math.max(-lim, Math.min(lim, view.x));
+  view.y = Math.max(-lim, Math.min(lim, view.y));
+}
+function applyTransform(){
+  clampPan();
+  viewport.setAttribute('transform',`translate(${view.x} ${view.y}) scale(${view.k})`);
+  updateCounterScale();
+  updateRoadWidths();
+  updateScalebar();
+  if(selectedId) positionTooltip(points.find(p=>p.siret===selectedId));
+}
+function recomputeBaseScale(){ baseScale = svg.getScreenCTM()?.a || 1; }
+function updateCounterScale(){
+  const s = 1/(baseScale*view.k);
+  csEls.forEach(g=>g.setAttribute('transform',
+    `translate(${g.dataset.x} ${g.dataset.y}) scale(${s})`));
+}
+function updateRoadWidths(){
+  const f = Math.min(2.1, Math.max(1, Math.pow(view.k, .38)));
+  const r = document.documentElement.style;
+  r.setProperty('--rw-a', (3.1*f).toFixed(2)+'px');
+  r.setProperty('--rw-b', (1.9*f).toFixed(2)+'px');
+  r.setProperty('--rw-c', (1.3*f).toFixed(2)+'px');
+}
+function fitInitial(){
+  view = {x:0, y:0, k:1};
+  recomputeBaseScale();
+  applyTransform();
+}
+
+function svgPoint(clientX, clientY){
+  return new DOMPoint(clientX, clientY).matrixTransform(svg.getScreenCTM().inverse());
+}
+function zoomAt(factor, clientX, clientY){
+  const rect = svg.getBoundingClientRect();
+  const p = svgPoint(clientX ?? rect.left+rect.width/2, clientY ?? rect.top+rect.height/2);
+  const mx = (p.x-view.x)/view.k, my = (p.y-view.y)/view.k;
+  view.k = Math.min(K_MAX, Math.max(K_MIN, view.k*factor));
+  view.x = p.x - mx*view.k;
+  view.y = p.y - my*view.k;
+  applyTransform();
+}
+
+function bindMapInteractions(){
+  let dragging=false, start=null, moved=false, pinch=null;
+  svg.addEventListener('pointerdown', e=>{
+    dragging=true; moved=false; svg.classList.add('grabbing');
+    start = {p:svgPoint(e.clientX,e.clientY), x:view.x, y:view.y};
+    svg.setPointerCapture(e.pointerId);
+  });
+  svg.addEventListener('pointermove', e=>{
+    if(!dragging || pinch) return;
+    const p = svgPoint(e.clientX,e.clientY);
+    if(Math.abs(p.x-start.p.x)+Math.abs(p.y-start.p.y) > 2) moved=true;
+    view.x = start.x + (p.x-start.p.x);
+    view.y = start.y + (p.y-start.p.y);
+    applyTransform();
+  });
+  const endDrag = ()=>{ dragging=false; svg.classList.remove('grabbing'); };
+  svg.addEventListener('pointerup', endDrag);
+  svg.addEventListener('pointercancel', endDrag);
+  svg.addEventListener('click', e=>{ if(!moved && e.target===svg) closeTooltip(); });
+  svg.addEventListener('wheel', e=>{
+    e.preventDefault();
+    zoomAt(e.deltaY<0 ? 1.18 : 1/1.18, e.clientX, e.clientY);
+  }, {passive:false});
+  svg.addEventListener('dblclick', e=>zoomAt(1.5, e.clientX, e.clientY));
+
+  const touches = new Map();
+  svg.addEventListener('pointerdown', e=>{
+    if(e.pointerType!=='touch') return;
+    touches.set(e.pointerId,[e.clientX,e.clientY]);
+    if(touches.size===2){
+      const [a,b] = [...touches.values()];
+      pinch = {d:Math.hypot(a[0]-b[0],a[1]-b[1])};
+      dragging=false;
+    }
+  });
+  svg.addEventListener('pointermove', e=>{
+    if(e.pointerType!=='touch' || !touches.has(e.pointerId)) return;
+    touches.set(e.pointerId,[e.clientX,e.clientY]);
+    if(pinch && touches.size===2){
+      const [a,b] = [...touches.values()];
+      const d = Math.hypot(a[0]-b[0], a[1]-b[1]);
+      if(pinch.d>0) zoomAt(d/pinch.d, (a[0]+b[0])/2, (a[1]+b[1])/2);
+      pinch.d = d;
+    }
+  });
+  const dropTouch = e=>{
+    touches.delete(e.pointerId);
+    if(touches.size<2) pinch=null;
+  };
+  svg.addEventListener('pointerup', dropTouch);
+  svg.addEventListener('pointercancel', dropTouch);
+
+  document.getElementById('zoomIn').addEventListener('click', ()=>zoomAt(1.35));
+  document.getElementById('zoomOut').addEventListener('click', ()=>zoomAt(1/1.35));
+  document.getElementById('zoomReset').addEventListener('click', fitInitial);
+}
+
+function updateScalebar(){
+  const rect = svg.getBoundingClientRect();
+  const pxPerMetre = (rect.width/svg.viewBox.baseVal.width) * view.k;
+  const target = 80;
+  const nice = [25,50,100,200,250,500,1000]
+    .reduce((a,b)=> Math.abs(b-target/pxPerMetre) < Math.abs(a-target/pxPerMetre) ? b : a);
+  document.getElementById('scalebarBar').style.width = Math.round(nice*pxPerMetre)+'px';
+  document.getElementById('scalebarLabel').textContent = nice+' m';
+}
+
+function setBackgroundInert(on){
+  const bgEls = [
+    document.querySelector('.topbar'),
+    sidebar,
+    ...document.querySelectorAll('.mapwrap > *:not(.brief)')
+  ];
+  bgEls.forEach(el=>{ if(el) el.toggleAttribute('inert', on); });
+}
+function openBrief(){
+  closeTooltip();
+  closeDrawer();
+  briefEl.hidden = false;
+  appEl.classList.add('briefing');
+  setBackgroundInert(true);
+  document.getElementById('closeBrief').focus({preventScroll:true});
+}
+function closeBrief(){
+  briefEl.hidden = true;
+  appEl.classList.remove('briefing');
+  setBackgroundInert(false);
+  syncSidebarInert();
+  scheduleFilterHint();
+}
+const MOBILE_BP = 940;
+function syncSidebarInert(){
+  const collapsedOffscreen = window.innerWidth <= MOBILE_BP && !sidebar.classList.contains('open');
+  sidebar.toggleAttribute('inert', collapsedOffscreen);
+}
+function closeDrawer(){
+  sidebar.classList.remove('open');
+  scrim.classList.remove('show');
+  document.getElementById('drawerToggle').setAttribute('aria-expanded','false');
+  syncSidebarInert();
+}
+function openDrawer(){
+  sidebar.classList.add('open');
+  scrim.classList.add('show');
+  document.getElementById('drawerToggle').setAttribute('aria-expanded','true');
+  syncSidebarInert();
+}
+
+let hintTimer=null;
+function scheduleFilterHint(){
+  if(hintShown || hintTimer) return;
+  hintTimer = setTimeout(showFilterHint, 4000);
+}
+function showFilterHint(){
+  if(hintShown) return;
+  hintShown = true;
+  document.getElementById('filterHint').hidden = false;
+}
+function hideFilterHint(){
+  document.getElementById('filterHint').hidden = true;
+}
+function refreshChipStates(){
+  document.querySelectorAll('.chip').forEach(chip=>{
+    const on = filters[chip.dataset.kind].has(chip.dataset.val);
+    chip.classList.toggle('active', on);
+    chip.classList.toggle('off', !on);
+    chip.setAttribute('aria-pressed', String(on));
+  });
+}
+
+function bindUiInteractions(){
+  document.getElementById('drawerToggle').addEventListener('click', ()=>{
+    if(sidebar.classList.contains('open')) closeDrawer(); else openDrawer();
+  });
+  scrim.addEventListener('click', closeDrawer);
+  document.getElementById('openBrief').addEventListener('click', openBrief);
+  document.getElementById('closeBrief').addEventListener('click', closeBrief);
+  document.getElementById('dismissHint').addEventListener('click', hideFilterHint);
+  document.getElementById('showAllFilters').addEventListener('click', ()=>{
+    filters.priorite = new Set(['A','B','C']);
+    filters.interlocuteur = new Set(ALL_INTERLOCUTEUR);
+    refreshChipStates();
+    applyFilters();
+    hideFilterHint();
+    if(window.innerWidth<=MOBILE_BP) openDrawer();
+  });
+  document.addEventListener('keydown', e=>{
+    if(e.key!=='Escape') return;
+    if(!briefEl.hidden) closeBrief();
+    else if(!tooltip.hidden) closeTooltip();
+    else closeDrawer();
+  });
+  window.addEventListener('resize', ()=>{ recomputeBaseScale(); applyTransform(); syncSidebarInert(); });
+  syncSidebarInert();
+}
+
+setBackgroundInert(true);
+init();
+</script>
