@@ -99,6 +99,8 @@ select{touch-action:manipulation;}
 .chip .dot{width:8px;height:8px;border-radius:50%;flex:none;}
 .chip.active{background:var(--accent-soft);border-color:var(--accent);color:var(--ink);}
 .chip.off{opacity:.5;}
+.chip.zero .n{color:var(--muted);}
+.chip.zero.off{opacity:.35;}
 select.sel{
   width:100%;font:500 12.5px var(--font-body);color:var(--ink);background:var(--surface);
   border:1px solid var(--line-strong);border-radius:8px;padding:8px 9px;color-scheme:light dark;
@@ -606,19 +608,19 @@ function chipClass(kind, val){
 function buildFilters(rep, legende){
   document.getElementById('chipsPriorite').innerHTML = ['A','B','C'].map(k =>
     `<button class="${chipClass('priorite',k)}" type="button" aria-pressed="${filters.priorite.has(k)}" data-kind="priorite" data-val="${k}" title="${noDash(legende.priorite[k])}">
-       <span class="dot" style="background:${PRI_COLOR[k]}"></span>${k} · ${rep.par_priorite[k]}</button>`
+       <span class="dot" style="background:${PRI_COLOR[k]}"></span>${k} · <span class="n">${rep.par_priorite[k]}</span></button>`
   ).join('');
 
   const interList = Object.keys(rep.par_interlocuteur);
   ALL_INTERLOCUTEUR = interList;
   document.getElementById('chipsInterlocuteur').innerHTML = interList.map(k =>
-    `<button class="${chipClass('interlocuteur',k)}" type="button" aria-pressed="${filters.interlocuteur.has(k)}" data-kind="interlocuteur" data-val="${k}" title="${noDash(legende.interlocuteur[k])}">${k} · ${rep.par_interlocuteur[k]}</button>`
+    `<button class="${chipClass('interlocuteur',k)}" type="button" aria-pressed="${filters.interlocuteur.has(k)}" data-kind="interlocuteur" data-val="${k}" title="${noDash(legende.interlocuteur[k])}">${k} · <span class="n">${rep.par_interlocuteur[k]}</span></button>`
   ).join('');
 
   const sel = document.getElementById('selSecteur');
-  sel.innerHTML = `<option value="all">Tous les secteurs · ${DATA.meta.entreprises_retenues}</option>` +
+  sel.innerHTML = `<option value="all" data-label="Tous les secteurs">Tous les secteurs · ${DATA.meta.entreprises_retenues}</option>` +
     Object.entries(rep.par_secteur).sort((a,b)=>b[1]-a[1])
-      .map(([s,n])=>`<option value="${s}">${s} · ${n}</option>`).join('');
+      .map(([s,n])=>`<option value="${s}" data-label="${s}">${s} · ${n}</option>`).join('');
 
   document.querySelectorAll('.chip').forEach(chip=>{
     chip.addEventListener('click', ()=>{
@@ -724,7 +726,32 @@ function visibleFor(p){
     && (filters.estime || p.effectif_fiabilite!=='Estimé');
 }
 
+/* Compteurs croisés : chaque option affiche le nombre d'entreprises qu'elle donnerait
+   compte tenu des autres filtres actifs (priorité, interlocuteur, secteur, effectifs estimés). */
+function matchesExcept(p, skip){
+  return (skip==='priorite' || filters.priorite.has(p.priorite))
+    && (skip==='interlocuteur' || filters.interlocuteur.has(p.interlocuteur))
+    && (skip==='secteur' || filters.secteur==='all' || p.secteur===filters.secteur)
+    && (filters.estime || p.effectif_fiabilite!=='Estimé');
+}
+function updateFacetCounts(){
+  const count = (skip, key, val) => points.filter(p => matchesExcept(p, skip) && p[key]===val).length;
+  document.querySelectorAll('.chip').forEach(chip=>{
+    const kind = chip.dataset.kind, key = kind==='priorite' ? 'priorite' : 'interlocuteur';
+    const n = count(kind, key, chip.dataset.val);
+    chip.querySelector('.n').textContent = n;
+    chip.classList.toggle('zero', n===0);
+  });
+  const sel = document.getElementById('selSecteur');
+  const base = points.filter(p => matchesExcept(p, 'secteur'));
+  [...sel.options].forEach(opt=>{
+    const n = opt.value==='all' ? base.length : base.filter(p => p.secteur===opt.value).length;
+    opt.textContent = `${opt.dataset.label} · ${n}`;
+  });
+}
+
 function applyFilters(){
+  updateFacetCounts();
   const visible = points.filter(visibleFor);
   const ids = new Set(visible.map(p=>p.siret));
   points.forEach(p=>{ markerEls[p.siret].style.display = ids.has(p.siret) ? '' : 'none'; });
