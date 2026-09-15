@@ -953,14 +953,21 @@ function zoomAt(factor, clientX, clientY){
 function bindMapInteractions(){
   let dragging=false, start=null, moved=false, pinch=null;
   svg.addEventListener('pointerdown', e=>{
-    dragging=true; moved=false; svg.classList.add('grabbing');
-    start = {p:svgPoint(e.clientX,e.clientY), x:view.x, y:view.y};
-    svg.setPointerCapture(e.pointerId);
+    dragging=true; moved=false;
+    start = {p:svgPoint(e.clientX,e.clientY), x:view.x, y:view.y, cx:e.clientX, cy:e.clientY};
   });
   svg.addEventListener('pointermove', e=>{
     if(!dragging || pinch) return;
     const p = svgPoint(e.clientX,e.clientY);
-    if(Math.abs(p.x-start.p.x)+Math.abs(p.y-start.p.y) > 2) moved=true;
+    // Seuil en pixels écran (plus large au doigt) : en deçà, c'est un clic, pas un glissement.
+    const slop = e.pointerType==='touch' ? 8 : 4;
+    if(!moved && Math.hypot(e.clientX-start.cx, e.clientY-start.cy) > slop){
+      // On ne capture le pointeur qu'une fois le glissement engagé : un simple clic
+      // reste ainsi livré à la bulle visée (la capture le redirigerait vers le SVG).
+      moved=true; svg.classList.add('grabbing');
+      try{ svg.setPointerCapture(e.pointerId); }catch(_){}
+    }
+    if(!moved) return;
     view.x = start.x + (p.x-start.p.x);
     view.y = start.y + (p.y-start.p.y);
     applyTransform();
@@ -968,7 +975,7 @@ function bindMapInteractions(){
   const endDrag = ()=>{ dragging=false; svg.classList.remove('grabbing'); };
   svg.addEventListener('pointerup', endDrag);
   svg.addEventListener('pointercancel', endDrag);
-  svg.addEventListener('click', e=>{ if(!moved && e.target===svg) closeTooltip(); });
+  svg.addEventListener('click', e=>{ if(!moved && !e.target.closest('.marker')) closeTooltip(); });
   svg.addEventListener('wheel', e=>{
     e.preventDefault();
     zoomAt(e.deltaY<0 ? 1.18 : 1/1.18, e.clientX, e.clientY);
