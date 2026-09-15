@@ -921,6 +921,20 @@ function positionTooltip(p){
   tooltip.style.left = left+'px';
   tooltip.style.top = top+'px';
 }
+/* La fiche est posée à l'écran indépendamment de la carte : on ne la ramène dans le cadre
+   que si la fenêtre change de taille (redimensionnement, rotation). */
+function keepTooltipInFrame(){
+  if(tooltip.hidden || isMobile()) return;
+  const map = svg.getBoundingClientRect();
+  const tt = tooltip.getBoundingClientRect();
+  let left = tt.left, top = tt.top;
+  if(left + tt.width > map.right - 8) left = map.right - tt.width - 8;
+  if(left < map.left + 8) left = map.left + 8;
+  if(top + tt.height > window.innerHeight - 10) top = window.innerHeight - tt.height - 10;
+  if(top < map.top + 8) top = map.top + 8;
+  tooltip.style.left = left+'px';
+  tooltip.style.top = top+'px';
+}
 function closeTooltip(){
   tooltip.hidden = true;
   selectedId = null;
@@ -943,7 +957,6 @@ function applyTransform(){
   updateCounterScale();
   updateRoadWidths();
   updateScalebar();
-  if(selectedId) positionTooltip(points.find(p=>p.siret===selectedId));
 }
 function recomputeBaseScale(){ baseScale = svg.getScreenCTM()?.a || 1; }
 function updateCounterScale(){
@@ -1143,7 +1156,7 @@ function bindUiInteractions(){
     else if(!tooltip.hidden) closeTooltip();
     else closeDrawer();
   });
-  window.addEventListener('resize', ()=>{ recomputeBaseScale(); applyTransform(); syncSidebarInert(); });
+  window.addEventListener('resize', ()=>{ recomputeBaseScale(); applyTransform(); syncSidebarInert(); keepTooltipInFrame(); });
   syncSidebarInert();
 }
 
